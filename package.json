@@ -1,0 +1,22 @@
+{
+  "name": "map",
+  "version": "0.0.0",
+  "description": "Insert free map into HTML using LeafletJS dependency",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edseto/map.git"
+  },
+  "author": "Edgar Seguí Toro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edseto/map/issues"
+  },
+  "homepage": "https://github.com/edseto/map#readme",
+  "dependencies": {
+    "leaflet": "^1.8.0"
+  }
+}
