@@ -3,3 +3,4 @@ node_modules/*
 .vscode/*
 .git/*
 dist/js/main.js.LICENSE.txt
+dist/*.png
