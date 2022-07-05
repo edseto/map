@@ -1,5 +1,4 @@
 import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
 
 class Map {
     /**
@@ -24,7 +23,7 @@ class Map {
     #init() {
         this.#initMap()
         this.#addTitleLayer()
-        this.options.markers.forEach(marker => {
+        this.options.markers?.forEach(marker => {
             this.addMarker(marker)
         });
     }
