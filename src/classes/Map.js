@@ -9,7 +9,7 @@ class Map {
      * @param {{lat: Number, lng: Number, zoom: Number}} options.mapOptions - Options used to initializate the map
      * @param {{title: String, icon: String, address: String, position: { lat: Number, lng: Number}}[]} options.markers - Markers that will be added in the map
      * @param {String} markers[].title - Marker title and alt that describes the place
-     * @param {String} markers[].icon - Url where can the marker icon been founded
+     * @param {String} markers[].icon - Url where the marker icon can been founded
      * @param {String} markers[].address - Address shown on marker popup
      * @param {Number} markers[].position.lat - Latitude where the marker will be placed
      * @param {Number} markers[].position.lng - Longitude where the marker will be placed
