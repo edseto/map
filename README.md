@@ -45,16 +45,16 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 
 First of all you need to add Leaflet styles.
 
-- Adding it in the HTML
+- Option A: Adding it in the HTML
 ```html
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
    crossorigin=""/>
 ```
 
-- Adding it in the CSS 
+- Option B: Adding it in the CSS
 ```css
-@import 'leaflet/dist/css/leaflet.css'
+@import 'leaflet/dist/leaflet.css';
 ```
 
 Make sure your map container has a defined height, for example:
@@ -64,7 +64,7 @@ Make sure your map container has a defined height, for example:
 }
 ```
 
-Now you can a javascript like this
+Now you can add your javascript like this:
 ```javascript
 import Map from 'map'
 
@@ -76,9 +76,9 @@ const options = {
     },
     'markers': [
         {
-            'title': 'Restaurante la Tattinada'
+            'title': 'Restaurante la Tattinada',
             'icon': 'http://localhost:8080/img/map-icon.png',
-            'address': 'Parque de la draga',
+            'address': 'Plaça de Perpinyà, 24',
             'position': {
                 'lat': 42.116855610146345, 
                 'lng': 2.7658891677192545
@@ -89,7 +89,7 @@ const options = {
 
 new Map('map', options)
 ```
-What if I want to add markers later? Then you can use it like below
+What if I want to add markers later? Then you can do it using addMarker method, like below:
 
 ```javascript
 import Map from 'map'
@@ -105,9 +105,9 @@ const options = {
 const map = new Map('map', options)
 
 const marker = {
-    'title': 'Restaurante la Tattinada'
+    'title': 'Restaurante la Tattinada',
     'icon': 'http://localhost:8080/img/map-icon.png',
-    'address': 'Parque de la draga',
+    'address': 'Plaça de Perpinyà, 24',
     'position': {
         'lat': 42.116855610146345, 
         'lng': 2.7658891677192545
