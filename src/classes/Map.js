@@ -34,6 +34,7 @@ class Map {
         const { zoom } = this.options.mapOptions || 15
 
         this.map = L.map(this.selector).setView([lat, lng], zoom)
+        this.map._container.style.zIndex = 0
     }
 
     #addTileLayer() {
@@ -42,6 +43,14 @@ class Map {
             subdomains: 'abcd',
             attribution: '&copy; <a target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a target="_blank" rel="noopener noreferrer" href="https://carto.com/attributions">CARTO</a>'
         }).addTo(this.map);
+    }
+
+    #preventCloseButton(marker) {
+        marker?.addEventListener('click', () => {
+            this.map._container.querySelector('.leaflet-popup-close-button')?.addEventListener('click', (ev) => {
+                ev.preventDefault()
+            })
+        })
     }
 
     /**
@@ -62,7 +71,8 @@ class Map {
             riseOnHover: true,
         });
 
-        L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.map).bindPopup(`<b>${title}</b><br>${address}.`);
+        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.map).bindPopup(`<b>${title}</b><br>${address}`)
+        this.#preventCloseButton(mapMarker)
     }
 }
 
