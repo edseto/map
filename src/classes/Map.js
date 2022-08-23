@@ -45,6 +45,14 @@ class Map {
         }).addTo(this.map);
     }
 
+    #preventCloseButton(marker) {
+        marker?.addEventListener('click', () => {
+            this.map._container.querySelector('.leaflet-popup-close-button')?.addEventListener('click', (ev) => {
+                ev.preventDefault()
+            })
+        })
+    }
+
     /**
      * Add a new marker to the map
      * @param {Object} marker - Marker that will be added in the map
@@ -63,7 +71,8 @@ class Map {
             riseOnHover: true,
         });
 
-        L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.map).bindPopup(`<b>${title}</b><br>${address}`);
+        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.map).bindPopup(`<b>${title}</b><br>${address}`)
+        this.#preventCloseButton(mapMarker)
     }
 }
 
