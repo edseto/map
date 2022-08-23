@@ -34,6 +34,7 @@ class Map {
         const { zoom } = this.options.mapOptions || 15
 
         this.map = L.map(this.selector).setView([lat, lng], zoom)
+        this.map._container.style.zIndex = 0
     }
 
     #addTileLayer() {
@@ -62,7 +63,7 @@ class Map {
             riseOnHover: true,
         });
 
-        L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.map).bindPopup(`<b>${title}</b><br>${address}.`);
+        L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.map).bindPopup(`<b>${title}</b><br>${address}`);
     }
 }
 
