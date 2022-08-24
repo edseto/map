@@ -35,6 +35,10 @@ class Map {
 
         this.map = L.map(this.selector).setView([lat, lng], zoom)
         this.map._container.style.zIndex = 0
+
+        if(!this.options.scrollWheelZoom && typeof this.options.scrollWheelZoom !== 'undefined') {
+            this.map.scrollWheelZoom.disable()
+        }
     }
 
     #addTileLayer() {
