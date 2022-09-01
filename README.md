@@ -31,6 +31,8 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 | `lat` | `Number` | Latitude where the map will be placed |
 | `lng` | `Number` | Longitude where the map will be placed |
 | `zoom` | `Number` | **Optional** `Default: 15` Map zoom   |
+| `zIndex` | `Number` | **Optional** `Default: 0` Map container z-index   |
+| `scrollWheelZoom` | `Boolean` | **Optional** `Default: false` Enable/disable zoom with mouse scroll   |
 
 #### markers object
 
@@ -40,6 +42,7 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 | `icon` | `String` | Url where the marker icon can been founded |
 | `address` | `String` | Place address shown on marker popup |
 | `position` | `Object: {lat, lng}` | Position (latitude, longitude) where the marker will be placed   |
+| `size` | `Object: {width, height}` | **Optional** `Default: {33, 44}` Marker size (width, height) in px   |
 
 ## Usage/Examples
 
