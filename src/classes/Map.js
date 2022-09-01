@@ -1,12 +1,29 @@
 import L from 'leaflet'
 
+const defaultMapOptions = {
+    'mapOptions': {
+        'zoom': 15,
+        'zIndex': 0,
+        'scrollWheelZoom': false,
+    }
+}
+
+const defaultMarkerOptions = {
+    'title': '',
+    'address': '',
+    'size': {
+        'width': 33,
+        'height': 44,
+    }
+}
+
 class Map {
     /**
      * Create and insert a Leaflet Map into HTML containers
      * @constructor
      * @param {string} selector - Id of HTML container that will hold the map
      * @param {Object} options - Object with map options and markers to initialize the map
-     * @param {{lat: Number, lng: Number, zoom: Number}} options.mapOptions - Options used to initializate the map
+     * @param {{lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean}} options.mapOptions - Options used to initializate the map
      * @param {{title: String, icon: String, address: String, position: { lat: Number, lng: Number}}[]} options.markers - Markers that will be added in the map
      * @param {String} markers[].title - Marker title and alt that describes the place
      * @param {String} markers[].icon - Url where the marker icon can been founded
@@ -16,7 +33,7 @@ class Map {
      */
     constructor(selector, options) {
         this.selector = selector
-        this.options = options
+        this.options = { ...defaultMapOptions, ...options }
 
         this.#init()
     }
@@ -30,15 +47,10 @@ class Map {
     }
 
     #initMap() {
-        const { lat, lng } = this.options.mapOptions
-        const { zoom } = this.options.mapOptions || 15
+        const { lat, lng, zoom, zIndex, scrollWheelZoom } = this.options.mapOptions
 
-        this.map = L.map(this.selector).setView([lat, lng], zoom)
-        this.map._container.style.zIndex = 0
-
-        if(!this.options.scrollWheelZoom && typeof this.options.scrollWheelZoom !== 'undefined') {
-            this.map.scrollWheelZoom.disable()
-        }
+        this.map = L.map(this.selector, { scrollWheelZoom: scrollWheelZoom }).setView([lat, lng], zoom)
+        this.map._container.style.zIndex = zIndex
     }
 
     #addTileLayer() {
@@ -65,13 +77,18 @@ class Map {
      * @param {String} marker.address - Address shown on marker popup
      * @param {Number} marker.position.lat - Latitude where the marker will be placed
      * @param {Number} marker.position.lng - Longitude where the marker will be placed
+     * @param {Number} marker.size.width - Marker width
+     * @param {Number} marker.size.height - Marker height
      */
     addMarker(marker) {
+        marker = { ...defaultMarkerOptions, ...marker }
+        
         const { title, icon, address } = marker
         const { lat, lng } = marker.position
+        const { width, height } = marker.size
         const markerIcon = L.icon({
             iconUrl: icon,
-            iconSize: [33, 44],
+            iconSize: [width, height],
             riseOnHover: true,
         });
 
