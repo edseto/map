@@ -3,6 +3,16 @@
 It's a simple dependency that uses [Leaflet JS](https://github.com/Leaflet/Leaflet) to create a map and insert into your HTML. 
 I created this package to have a simplest way to insert a map into different projects without having to copy and paste the same code.
 Any suggerences or pull request are welcome to improve this simple dependency.
+
+## Table of contents
+- [Installation](#installation)
+- [Parameters](#parameters)
+    - [options object](#options-object)
+    - [mapOptions object](#mapoptions-object)
+    - [markers object](#markers-object)
+- [Usage/Examples](#usageexamples)
+- [License](#license)
+
 ## Installation
 
 Is not a npm public package yet, maybe in the future I'll publish it there, meanwhile to install this map dependency you should do it like this:
