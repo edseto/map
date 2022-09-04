@@ -1,5 +1,10 @@
 # Release Notes
 
+## [[v1.3.0](https://github.com/edseto/map/releases/tag/1.3.0)]
+
+### Added
+- Add custom markers popup [ed1d926](https://github.com/edseto/map/commit/ed1d926e2d2ed4fdc1a04605797e1d5a2bf04ad9)
+
 ## [[v1.2.0](https://github.com/edseto/map/releases/tag/1.2.0)]
 
 ### Added
