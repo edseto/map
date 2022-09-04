@@ -33,14 +33,15 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 | `zoom` | `Number` | **Optional** `Default: 15` Map zoom   |
 | `zIndex` | `Number` | **Optional** `Default: 0` Map container z-index   |
 | `scrollWheelZoom` | `Boolean` | **Optional** `Default: false` Enable/disable zoom with mouse scroll   |
+| `showCoverageOnHover` | `Boolean` | **Optional** `Default: false` Enable/disable show markercluster coverage on hover   |
 
 #### markers object
 
 | Parameter | Type     | Description                |
 | -------- | ------- | ------------------------- |
-| `title` | `String` | Marker title and alt that describes the place and shown on marker popup |
+| `title` | `String` | **Optional** Marker title and alt that describes the place and shown on marker popup |
 | `icon` | `String` | Url where the marker icon can been founded |
-| `address` | `String` | Place address shown on marker popup |
+| `address` | `String` | **Optional** Place address shown on marker popup |
 | `position` | `Object: {lat, lng}` | Position (latitude, longitude) where the marker will be placed   |
 | `size` | `Object: {width, height}` | **Optional** `Default: {33, 44}` Marker size (width, height) in px   |
 

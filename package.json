@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/edseto/map#readme",
   "dependencies": {
-    "leaflet": "^1.8.0"
+    "leaflet": "^1.8.0",
+    "leaflet.markercluster": "^1.5.3"
   },
   "devDependencies": {
     "css-loader": "^6.7.1",
