@@ -103,10 +103,10 @@ class Map {
             riseOnHover: true,
         });
 
-        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title})
-                        .addTo(this.markerCluster)
-                        .bindPopup(`<b>${title}</b><br>${address}`)
+        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.markerCluster)
 
+        if (title || address) mapMarker.bindPopup(`<b>${title}</b><br>${address}`)
+        
         this.#preventCloseButton(mapMarker)
     }
 }
