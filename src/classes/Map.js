@@ -1,19 +1,19 @@
 import L from 'leaflet'
 
 const defaultMapOptions = {
-    mapOptions: {
-        zoom: 15,
-        zIndex: 0,
-        scrollWheelZoom: false,
+    'mapOptions': {
+        'zoom': 15,
+        'zIndex': 0,
+        'scrollWheelZoom': false,
     }
 }
 
 const defaultMarkerOptions = {
-    title: '',
-    address: '',
-    size: {
-        width: 33,
-        height: 44,
+    'title': '',
+    'address': '',
+    'size': {
+        'width': 33,
+        'height': 44,
     }
 }
 

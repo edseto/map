@@ -72,19 +72,19 @@ Now you can add your javascript like this:
 import Map from 'map'
 
 const options = {
-    mapOptions: {
-        lat: 42.119460611154786, 
-        lng: 2.76507646206246,
-        zoom: 13
+    'mapOptions': {
+        'lat': 42.119460611154786, 
+        'lng': 2.76507646206246,
+        'zoom': 13
     },
-    markers: [
+    'markers': [
         {
-            title: 'Restaurante la Tattinada',
-            icon: 'http://localhost:8080/img/map-icon.png',
-            address: 'Plaça de Perpinyà, 24',
-            position: {
-                lat: 42.116855610146345, 
-                lng: 2.7658891677192545
+            'title': 'Restaurante la Tattinada',
+            'icon': 'http://localhost:8080/img/map-icon.png',
+            'address': 'Plaça de Perpinyà, 24',
+            'position': {
+                'lat': 42.116855610146345, 
+                'lng': 2.7658891677192545
             }
         }
     ]
@@ -98,22 +98,22 @@ What if I want to add markers later? Then you can do it using addMarker method, 
 import Map from 'map'
 
 const options = {
-    mapOptions: {
-        lat: 42.119460611154786, 
-        lng: 2.76507646206246,
-        zoom: 13
+    'mapOptions': {
+        'lat': 42.119460611154786, 
+        'lng': 2.76507646206246,
+        'zoom': 13
     },
 }
 
 const map = new Map('map', options)
 
 const marker = {
-    title: 'Restaurante la Tattinada',
-    icon: 'http://localhost:8080/img/map-icon.png',
-    address: 'Plaça de Perpinyà, 24',
-    position: {
-        lat: 42.116855610146345, 
-        lng: 2.7658891677192545
+    'title': 'Restaurante la Tattinada',
+    'icon': 'http://localhost:8080/img/map-icon.png',
+    'address': 'Plaça de Perpinyà, 24',
+    'position': {
+        'lat': 42.116855610146345, 
+        'lng': 2.7658891677192545
     }
 }
 
