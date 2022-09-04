@@ -29,8 +29,11 @@ class Map {
      * @param {String} markers[].title - Marker title and alt that describes the place
      * @param {String} markers[].icon - Url where the marker icon can been founded
      * @param {String} markers[].address - Address shown on marker popup
+     * @param {String} markers[].customPopup - Custom popup content
      * @param {Number} markers[].position.lat - Latitude where the marker will be placed
      * @param {Number} markers[].position.lng - Longitude where the marker will be placed
+     * @param {Number} markers[].size.width - Marker width
+     * @param {Number} markers[].size.height - Marker height
      */
     constructor(selector, options) {
         this.selector = selector
@@ -86,6 +89,7 @@ class Map {
      * @param {String} marker.title - Marker title and alt that describes the place
      * @param {String} marker.icon - Url where can the marker icon been founded
      * @param {String} marker.address - Address shown on marker popup
+     * @param {String} marker.customPopup - Custom popup content
      * @param {Number} marker.position.lat - Latitude where the marker will be placed
      * @param {Number} marker.position.lng - Longitude where the marker will be placed
      * @param {Number} marker.size.width - Marker width
@@ -94,7 +98,7 @@ class Map {
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
 
-        const { title, icon, address } = marker
+        const { title, icon, address, customPopup } = marker
         const { lat, lng } = marker.position
         const { width, height } = marker.size
         const markerIcon = L.icon({
@@ -105,7 +109,11 @@ class Map {
 
         const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.markerCluster)
 
-        if (title || address) mapMarker.bindPopup(`<b>${title}</b><br>${address}`)
+        if (customPopup) {
+            mapMarker.bindPopup(customPopup)
+        } else if (title || address) {
+            mapMarker.bindPopup(`<b>${title}</b><br>${address}`)
+        }
         
         this.#preventCloseButton(mapMarker)
     }
