@@ -5,6 +5,7 @@ const defaultMapOptions = {
         'zoom': 15,
         'zIndex': 0,
         'scrollWheelZoom': false,
+        'showCoverageOnHover': false,
     }
 }
 
@@ -39,26 +40,36 @@ class Map {
     }
 
     #init() {
-        this.#initMap()
         this.#addTileLayer()
+        this.#addMarkerClusterLayer()
         this.options.markers?.forEach(marker => {
             this.addMarker(marker)
         });
+        this.#initMap()
     }
 
     #initMap() {
         const { lat, lng, zoom, zIndex, scrollWheelZoom } = this.options.mapOptions
+        console.log(this.options);
 
         this.map = L.map(this.selector, { scrollWheelZoom: scrollWheelZoom }).setView([lat, lng], zoom)
         this.map._container.style.zIndex = zIndex
+        
+        this.map.addLayer(this.tileLayer)
+        this.map.addLayer(this.markerCluster)
     }
 
     #addTileLayer() {
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        this.tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             maxZoom: 20,
             subdomains: 'abcd',
             attribution: '&copy; <a target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a target="_blank" rel="noopener noreferrer" href="https://carto.com/attributions">CARTO</a>'
-        }).addTo(this.map);
+        });
+    }
+
+    #addMarkerClusterLayer() {
+        const { showCoverageOnHover } = this.options.mapOptions
+        this.markerCluster = L.markerClusterGroup({ showCoverageOnHover: showCoverageOnHover})
     }
 
     #preventCloseButton(marker) {
@@ -80,9 +91,9 @@ class Map {
      * @param {Number} marker.size.width - Marker width
      * @param {Number} marker.size.height - Marker height
      */
-    addMarker(marker) {
+     addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
-        
+
         const { title, icon, address } = marker
         const { lat, lng } = marker.position
         const { width, height } = marker.size
@@ -92,7 +103,10 @@ class Map {
             riseOnHover: true,
         });
 
-        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.map).bindPopup(`<b>${title}</b><br>${address}`)
+        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title})
+                        .addTo(this.markerCluster)
+                        .bindPopup(`<b>${title}</b><br>${address}`)
+
         this.#preventCloseButton(mapMarker)
     }
 }
