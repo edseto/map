@@ -3,6 +3,16 @@
 It's a simple dependency that uses [Leaflet JS](https://github.com/Leaflet/Leaflet) to create a map and insert into your HTML. 
 I created this package to have a simplest way to insert a map into different projects without having to copy and paste the same code.
 Any suggerences or pull request are welcome to improve this simple dependency.
+
+## Table of contents
+- [Installation](#installation)
+- [Parameters](#parameters)
+    - [options object](#options-object)
+    - [mapOptions object](#mapoptions-object)
+    - [markers object](#markers-object)
+- [Usage/Examples](#usageexamples)
+- [License](#license)
+
 ## Installation
 
 Is not a npm public package yet, maybe in the future I'll publish it there, meanwhile to install this map dependency you should do it like this:
@@ -33,14 +43,15 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 | `zoom` | `Number` | **Optional** `Default: 15` Map zoom   |
 | `zIndex` | `Number` | **Optional** `Default: 0` Map container z-index   |
 | `scrollWheelZoom` | `Boolean` | **Optional** `Default: false` Enable/disable zoom with mouse scroll   |
+| `showCoverageOnHover` | `Boolean` | **Optional** `Default: false` Enable/disable show markercluster coverage on hover   |
 
 #### markers object
 
 | Parameter | Type     | Description                |
 | -------- | ------- | ------------------------- |
-| `title` | `String` | Marker title and alt that describes the place and shown on marker popup |
+| `title` | `String` | **Optional** Marker title and alt that describes the place and shown on marker popup |
 | `icon` | `String` | Url where the marker icon can been founded |
-| `address` | `String` | Place address shown on marker popup |
+| `address` | `String` | **Optional** Place address shown on marker popup |
 | `position` | `Object: {lat, lng}` | Position (latitude, longitude) where the marker will be placed   |
 | `size` | `Object: {width, height}` | **Optional** `Default: {33, 44}` Marker size (width, height) in px   |
 
