@@ -5,6 +5,7 @@ I created this package to have a simplest way to insert a map into different pro
 Any suggerences or pull request are welcome to improve this simple dependency.
 
 ## Table of contents
+- [List of features](#list-of-features)
 - [Installation](#installation)
 - [Parameters](#parameters)
     - [options object](#options-object)
@@ -12,6 +13,13 @@ Any suggerences or pull request are welcome to improve this simple dependency.
     - [markers object](#markers-object)
 - [Usage/Examples](#usageexamples)
 - [License](#license)
+
+
+## List of features
+
+- Simple Open Street Map without POI (Points Of Interest) only the markers you add
+- Marker Cluster: If you have some markers so close, when it zooms out it will group them to avoid markers overlapping
+- Custom Popup: Add your own custom html or text into markers popup (then you should style it if you want it prettier)
 
 ## Installation
 
@@ -52,6 +60,7 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 | `title` | `String` | **Optional** Marker title and alt that describes the place and shown on marker popup |
 | `icon` | `String` | Url where the marker icon can been founded |
 | `address` | `String` | **Optional** Place address shown on marker popup |
+| `customPopup` | `String` | **Optional** Custom popup content |
 | `position` | `Object: {lat, lng}` | Position (latitude, longitude) where the marker will be placed   |
 | `size` | `Object: {width, height}` | **Optional** `Default: {33, 44}` Marker size (width, height) in px   |
 
@@ -59,16 +68,27 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 
 First of all you need to add Leaflet styles.
 
-- Option A: Adding it in the HTML
+- Option A: Adding it in the HTML with a CDN
 ```html
- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-   crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin=""
+    />
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
+    />
 ```
 
 - Option B: Adding it in the CSS
 ```css
 @import 'leaflet/dist/leaflet.css';
+@import 'leaflet.markercluster/dist/MarkerCluster.css';
+@import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 ```
 
 Make sure your map container has a defined height, for example:
@@ -129,6 +149,56 @@ const marker = {
 }
 
 map.addMarker(marker)
+```
+
+I would like to add my own popup content, can I? Of course you can, here is the way (this is just an example, you can add whatever you want as you style it propertly) with customPopup marker option (Remember: you will need to add your own styles in you css file):
+
+```javascript
+import Map from 'map'
+
+const options = {
+    'mapOptions': {
+        'lat': 42.119460611154786, 
+        'lng': 2.76507646206246,
+        'zoom': 13
+    },
+    'markers': [
+        {
+            'title': 'Restaurante la Tattinada',
+            'icon': 'http://localhost:8080/img/map-icon.png',
+            'address': 'Plaça de Perpinyà, 24',
+            'position': {
+                'lat': 42.116855610146345, 
+                'lng': 2.7658891677192545
+            },
+            'customPopup': `
+                <section class="home-map">
+                    <div class="home-map__item">
+                        <div class="home-map__image">
+                            <div class="c-img">
+                                <img class="c-img-fit" src="http://localhost:8080/img/map-icon.png" alt="Lorem ipsum">
+                            </div>
+                        </div>
+                        <div class="home-map__info">
+                            <div class="item-text">
+                                <div class="subtitle">Banyoles</div>
+                                <div class="title">Restaurante la Tattinada</div>
+                            </div>
+                            <div class="item-price">
+                                <div class="item-price__start">Desde</div>
+                                <div class="item-price__center">8.56</div>
+                                <div class="item-price__end">Pizza (tamaño individual)</div>
+                            </div>
+                            <a href="http://localhost:8080/some-link" class="c-button">Descubrir</a>
+                        </div>
+                    </div>
+                </section>`,
+        }
+    ]
+}
+
+new Map('map', options)
+
 ```
 
 ## License
