@@ -1,4 +1,5 @@
 import L from 'leaflet'
+import 'leaflet.markercluster'
 
 const defaultMapOptions = {
     'mapOptions': {
