@@ -1,6 +1,6 @@
 {
   "name": "map",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Insert free map into HTML using LeafletJS dependency",
   "main": "src/classes/Map.js",
   "scripts": {
