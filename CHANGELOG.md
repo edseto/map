@@ -1,5 +1,10 @@
 # Release Notes
 
+## [[v1.3.1](https://github.com/edseto/map/releases/tag/1.3.1)]
+
+### Fixed
+- Add missing leaflet markercluster import [611403b](https://github.com/edseto/map/commit/611403b9d1c0a3ff40e029447623109915ce51ee)
+
 ## [[v1.3.0](https://github.com/edseto/map/releases/tag/1.3.0)]
 
 ### Added
