@@ -48,19 +48,19 @@ class Map {
         this.#addMarkerClusterLayer()
         this.options.markers?.forEach(marker => {
             this.addMarker(marker)
-        });
+        })
         this.#initMap()
     }
 
     #initMap() {
         const { lat, lng, zoom, zIndex, scrollWheelZoom } = this.options.mapOptions
-        console.log(this.options);
 
         this.map = L.map(this.selector, { scrollWheelZoom: scrollWheelZoom }).setView([lat, lng], zoom)
         this.map._container.style.zIndex = zIndex
         
         this.map.addLayer(this.tileLayer)
         this.map.addLayer(this.markerCluster)
+        this.map.fitBounds(this.markerCluster.getBounds())
     }
 
     #addTileLayer() {
@@ -68,7 +68,7 @@ class Map {
             maxZoom: 20,
             subdomains: 'abcd',
             attribution: '&copy; <a target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a target="_blank" rel="noopener noreferrer" href="https://carto.com/attributions">CARTO</a>'
-        });
+        })
     }
 
     #addMarkerClusterLayer() {
@@ -106,14 +106,14 @@ class Map {
             iconUrl: icon,
             iconSize: [width, height],
             riseOnHover: true,
-        });
+        })
 
         const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.markerCluster)
 
         if (customPopup) {
             mapMarker.bindPopup(customPopup)
         } else if (title || address) {
-            mapMarker.bindPopup(`<b>${title}</b><br>${address}`)
+            mapMarker.bindPopup(`<b>${title}</b><div>${address}</div>`)
         }
         
         this.#preventCloseButton(mapMarker)

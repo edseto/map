@@ -1,5 +1,10 @@
 # Release Notes
 
+## [[v1.3.2](https://github.com/edseto/map/releases/tag/1.3.2)]
+
+### Added
+- Fit map bounds to center map relative to all markers [6fca398](https://github.com/edseto/map/commit/6fca39864768e525123d8e4ad016408f1b103da1)
+
 ## [[v1.3.1](https://github.com/edseto/map/releases/tag/1.3.1)]
 
 ### Fixed
