@@ -113,7 +113,7 @@ class Map {
         if (customPopup) {
             mapMarker.bindPopup(customPopup)
         } else if (title || address) {
-            mapMarker.bindPopup(`<b>${title}</b><br>${address}`)
+            mapMarker.bindPopup(`<b>${title}</b><div>${address}</div>`)
         }
         
         this.#preventCloseButton(mapMarker)
