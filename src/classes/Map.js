@@ -61,6 +61,7 @@ class Map {
         this.map.addLayer(this.tileLayer)
         this.map.addLayer(this.markerCluster)
         this.map.fitBounds(this.markerCluster.getBounds())
+        this.map.setZoom(this.options.mapOptions.zoom)
     }
 
     #addTileLayer() {
