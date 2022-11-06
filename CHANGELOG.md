@@ -1,5 +1,10 @@
 # Release Notes
 
+## [[v1.3.1](https://github.com/edseto/map/releases/tag/1.4.0)]
+
+### Fixed
+- Set zoom after bounds to avoid being overridden by fitBounds method [7bdf39b](https://github.com/edseto/map/commit/7bdf39b9073aeb56e81eee600ee12454c8f30adb)
+
 ## [[v1.3.2](https://github.com/edseto/map/releases/tag/1.3.2)]
 
 ### Added
