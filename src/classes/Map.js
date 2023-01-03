@@ -76,8 +76,10 @@ class Map {
         this.markerCluster = L.markerClusterGroup({ showCoverageOnHover: showCoverageOnHover})
     }
 
-    #preventCloseButton(marker) {
+    #markerListener(marker) {
         marker?.addEventListener('click', () => {
+            this.map.panTo(marker.getLatLng())
+
             this.map._container.querySelector('.leaflet-popup-close-button')?.addEventListener('click', (ev) => {
                 ev.preventDefault()
             })
@@ -116,7 +118,7 @@ class Map {
             mapMarker.bindPopup(`<b>${title}</b><div>${address}</div>`)
         }
         
-        this.#preventCloseButton(mapMarker)
+        this.#markerListener(mapMarker)
     }
 }
 
