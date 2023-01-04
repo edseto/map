@@ -1,6 +1,12 @@
 # Release Notes
 
-## [[v1.3.1](https://github.com/edseto/map/releases/tag/1.4.0)]
+## [[v1.5.0](https://github.com/edseto/map/releases/tag/1.5.0)]
+
+### Added
+- Add centerOnClick marker option [65533ba](https://github.com/edseto/map/commit/65533ba1d9ba74d977b2fce9983753080f32f21d)
+- Center map on marker click [9b90914](https://github.com/edseto/map/commit/9b909146ba600f5252e7ba5f451715a18f9ed87f)
+
+## [[v1.4.0](https://github.com/edseto/map/releases/tag/1.4.0)]
 
 ### Fixed
 - Set zoom after bounds to avoid being overridden by fitBounds method [7bdf39b](https://github.com/edseto/map/commit/7bdf39b9073aeb56e81eee600ee12454c8f30adb)
