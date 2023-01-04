@@ -13,6 +13,7 @@ const defaultMapOptions = {
 const defaultMarkerOptions = {
     'title': '',
     'address': '',
+    'centerOnClick': true,
     'size': {
         'width': 33,
         'height': 44,
@@ -30,6 +31,7 @@ class Map {
      * @param {String} markers[].title - Marker title and alt that describes the place
      * @param {String} markers[].icon - Url where the marker icon can been founded
      * @param {String} markers[].address - Address shown on marker popup
+     * @param {String} markers[].centerOnClick - Center map to marker when clicked
      * @param {String} markers[].customPopup - Custom popup content
      * @param {Number} markers[].position.lat - Latitude where the marker will be placed
      * @param {Number} markers[].position.lng - Longitude where the marker will be placed
@@ -77,8 +79,10 @@ class Map {
         this.markerCluster = L.markerClusterGroup({ showCoverageOnHover: showCoverageOnHover})
     }
 
-    #preventCloseButton(marker) {
+    #markerListener(marker, centerOnClick) {
         marker?.addEventListener('click', () => {
+            if (centerOnClick) this.map.panTo(marker.getLatLng())
+
             this.map._container.querySelector('.leaflet-popup-close-button')?.addEventListener('click', (ev) => {
                 ev.preventDefault()
             })
@@ -92,6 +96,7 @@ class Map {
      * @param {String} marker.icon - Url where can the marker icon been founded
      * @param {String} marker.address - Address shown on marker popup
      * @param {String} marker.customPopup - Custom popup content
+     * @param {boolean} marker.centerOnClick - Center map to marker when clicked
      * @param {Number} marker.position.lat - Latitude where the marker will be placed
      * @param {Number} marker.position.lng - Longitude where the marker will be placed
      * @param {Number} marker.size.width - Marker width
@@ -117,7 +122,7 @@ class Map {
             mapMarker.bindPopup(`<b>${title}</b><div>${address}</div>`)
         }
         
-        this.#preventCloseButton(mapMarker)
+        this.#markerListener(mapMarker, marker.centerOnClick)
     }
 }
 
