@@ -119,6 +119,8 @@ class Map {
 
         const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.markerCluster)
 
+        this.markers.push(mapMarker)
+
         if (customPopup) {
             mapMarker.bindPopup(customPopup)
         } else if (title || address) {
