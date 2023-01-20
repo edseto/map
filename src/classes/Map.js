@@ -42,6 +42,9 @@ class Map {
         this.selector = selector
         this.options = { ...defaultMapOptions, ...options }
 
+        this.map = null
+        this.markers = []
+
         this.#init()
     }
 
