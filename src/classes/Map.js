@@ -6,6 +6,7 @@ const defaultMapOptions = {
         'zoom': 15,
         'zIndex': 0,
         'scrollWheelZoom': false,
+        'dragging': !L.Browser.mobile,
         'showCoverageOnHover': false,
     }
 }
@@ -55,9 +56,9 @@ class Map {
     }
 
     #initMap() {
-        const { lat, lng, zoom, zIndex, scrollWheelZoom } = this.options.mapOptions
+        const { lat, lng, zoom, zIndex, scrollWheelZoom, dragging } = this.options.mapOptions
 
-        this.map = L.map(this.selector, { scrollWheelZoom: scrollWheelZoom }).setView([lat, lng], zoom)
+        this.map = L.map(this.selector, { scrollWheelZoom: scrollWheelZoom, dragging: dragging }).setView([lat, lng], zoom)
         this.map._container.style.zIndex = zIndex
         
         this.map.addLayer(this.tileLayer)
