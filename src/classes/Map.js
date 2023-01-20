@@ -129,6 +129,11 @@ class Map {
         
         this.#markerListener(mapMarker, marker.centerOnClick)
     }
+
+    removeMarker(index) {
+        this.markerCluster.removeLayer(this.markers[index])
+        this.markers.splice(index, 1);
+    }
 }
 
 export default Map
