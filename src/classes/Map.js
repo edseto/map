@@ -17,7 +17,11 @@ const defaultMarkerOptions = {
     'size': {
         'width': 33,
         'height': 44,
-    }
+    },
+    'anchor': {
+        x: 16,
+        y: 44,
+    },
 }
 
 class Map {
@@ -108,9 +112,11 @@ class Map {
         const { title, icon, address, customPopup } = marker
         const { lat, lng } = marker.position
         const { width, height } = marker.size
+        const { x: anchorX, y: anchorY } = marker.anchor
         const markerIcon = L.icon({
             iconUrl: icon,
             iconSize: [width, height],
+            iconAnchor: [anchorX, anchorY],
             riseOnHover: true,
         })
 
