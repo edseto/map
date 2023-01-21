@@ -2,7 +2,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
-    map: './src/classes/Map.js',
     app: './src/entry-points/app.js'
   },
   mode: 'development',
@@ -22,7 +21,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
         template: './src/index.html',
-        chunks: ['map', 'app'],
+        chunks: ['app'],
     }),
   ],
 };
