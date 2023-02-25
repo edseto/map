@@ -54,6 +54,9 @@ class Map {
             },
         }
 
+        this.map = null
+        this.markers = []
+
         this.#init()
     }
 
@@ -130,6 +133,8 @@ class Map {
 
         const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.markerCluster)
 
+        this.markers.push(mapMarker)
+
         if (customPopup) {
             mapMarker.bindPopup(customPopup)
         } else if (title || address) {
@@ -137,6 +142,11 @@ class Map {
         }
         
         this.#markerListener(mapMarker, marker.centerOnClick)
+    }
+
+    removeMarker(index) {
+        this.markerCluster.removeLayer(this.markers[index])
+        this.markers.splice(index, 1);
     }
 }
 
