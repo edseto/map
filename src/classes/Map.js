@@ -1,8 +1,8 @@
 import L from 'leaflet'
 import 'leaflet.markercluster'
 
-const defaultMapOptions = {
-    'mapOptions': {
+const defaultOptions = {
+    mapOptions: {
         'zoom': 15,
         'zIndex': 0,
         'scrollWheelZoom': false,
@@ -40,7 +40,14 @@ class Map {
      */
     constructor(selector, options) {
         this.selector = selector
-        this.options = { ...defaultMapOptions, ...options }
+
+        this.options = {
+            ...options,
+            mapOptions: {
+                ...defaultOptions.mapOptions,
+                ...options.mapOptions,
+            },
+        }
 
         this.#init()
     }
