@@ -42,6 +42,8 @@ class Map {
      * @param {Number} markers[].position.lng - Longitude where the marker will be placed
      * @param {Number} markers[].size.width - Marker width
      * @param {Number} markers[].size.height - Marker height
+     * @param {Number} markers[].anchor.x - Marker anchor x
+     * @param {Number} markers[].anchor.y - Marker anchor y
      */
     constructor(selector, options) {
         this.selector = selector
@@ -116,6 +118,8 @@ class Map {
      * @param {Number} marker.position.lng - Longitude where the marker will be placed
      * @param {Number} marker.size.width - Marker width
      * @param {Number} marker.size.height - Marker height
+     * @param {Number} marker.anchor.x - Marker anchor x
+     * @param {Number} marker.anchor.y - Marker anchor y
      */
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
