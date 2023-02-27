@@ -64,6 +64,7 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 | `centerOnClick` | `Boolean`                 | **Optional** `Default: true` Center map to marker when clicked                                    |
 | `position` | `Object: {lat, lng}`      | Position (latitude, longitude) where the marker will be placed                       |
 | `size` | `Object: {width, height}` | **Optional** `Default: {33, 44}` Marker size (width, height) in px                   |
+| `anchor` | `Object: {x, y}` | **Optional** `Default: {16, 44}` Marker anchor position, the icon will be centered by these values                   |
 
 ## Usage/Examples
 

@@ -1,11 +1,12 @@
 import L from 'leaflet'
 import 'leaflet.markercluster'
 
-const defaultMapOptions = {
-    'mapOptions': {
+const defaultOptions = {
+    mapOptions: {
         'zoom': 15,
         'zIndex': 0,
         'scrollWheelZoom': false,
+        'dragging': !L.Browser.mobile,
         'showCoverageOnHover': false,
     }
 }
@@ -17,7 +18,11 @@ const defaultMarkerOptions = {
     'size': {
         'width': 33,
         'height': 44,
-    }
+    },
+    'anchor': {
+        x: 16,
+        y: 44,
+    },
 }
 
 class Map {
@@ -37,10 +42,22 @@ class Map {
      * @param {Number} markers[].position.lng - Longitude where the marker will be placed
      * @param {Number} markers[].size.width - Marker width
      * @param {Number} markers[].size.height - Marker height
+     * @param {Number} markers[].anchor.x - Marker anchor x
+     * @param {Number} markers[].anchor.y - Marker anchor y
      */
     constructor(selector, options) {
         this.selector = selector
-        this.options = { ...defaultMapOptions, ...options }
+
+        this.options = {
+            ...options,
+            mapOptions: {
+                ...defaultOptions.mapOptions,
+                ...options.mapOptions,
+            },
+        }
+
+        this.map = null
+        this.markers = []
 
         this.#init()
     }
@@ -55,9 +72,9 @@ class Map {
     }
 
     #initMap() {
-        const { lat, lng, zoom, zIndex, scrollWheelZoom } = this.options.mapOptions
+        const { lat, lng, zoom, zIndex, scrollWheelZoom, dragging } = this.options.mapOptions
 
-        this.map = L.map(this.selector, { scrollWheelZoom: scrollWheelZoom }).setView([lat, lng], zoom)
+        this.map = L.map(this.selector, { scrollWheelZoom: scrollWheelZoom, dragging: dragging }).setView([lat, lng], zoom)
         this.map._container.style.zIndex = zIndex
         
         this.map.addLayer(this.tileLayer)
@@ -101,6 +118,8 @@ class Map {
      * @param {Number} marker.position.lng - Longitude where the marker will be placed
      * @param {Number} marker.size.width - Marker width
      * @param {Number} marker.size.height - Marker height
+     * @param {Number} marker.anchor.x - Marker anchor x
+     * @param {Number} marker.anchor.y - Marker anchor y
      */
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
@@ -108,13 +127,17 @@ class Map {
         const { title, icon, address, customPopup } = marker
         const { lat, lng } = marker.position
         const { width, height } = marker.size
+        const { x: anchorX, y: anchorY } = marker.anchor
         const markerIcon = L.icon({
             iconUrl: icon,
             iconSize: [width, height],
+            iconAnchor: [anchorX, anchorY],
             riseOnHover: true,
         })
 
         const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.markerCluster)
+
+        this.markers.push(mapMarker)
 
         if (customPopup) {
             mapMarker.bindPopup(customPopup)
@@ -123,6 +146,11 @@ class Map {
         }
         
         this.#markerListener(mapMarker, marker.centerOnClick)
+    }
+
+    removeMarker(index) {
+        this.markerCluster.removeLayer(this.markers[index])
+        this.markers.splice(index, 1);
     }
 }
 
