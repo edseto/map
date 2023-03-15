@@ -55,16 +55,17 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 
 #### markers object
 
-| Parameter | Type                      | Description                                                                          |
-| -------- |---------------------------|--------------------------------------------------------------------------------------|
-| `title` | `String`                  | **Optional** Marker title and alt that describes the place and shown on marker popup |
-| `icon` | `String`                  | Url where the marker icon can been founded                                           |
-| `address` | `String`                  | **Optional** Place address shown on marker popup                                     |
-| `customPopup` | `String`                  | **Optional** Custom popup content                                                    |
-| `centerOnClick` | `Boolean`                 | **Optional** `Default: true` Center map to marker when clicked                                    |
-| `position` | `Object: {lat, lng}`      | Position (latitude, longitude) where the marker will be placed                       |
-| `size` | `Object: {width, height}` | **Optional** `Default: {33, 44}` Marker size (width, height) in px                   |
-| `anchor` | `Object: {x, y}` | **Optional** `Default: {16, 44}` Marker anchor position, the icon will be centered by these values                   |
+| Parameter       | Type                      | Description                                                                                                    |
+|-----------------|---------------------------|----------------------------------------------------------------------------------------------------------------|
+| `title`         | `String`                  | **Optional** Marker title and alt that describes the place and shown on marker popup                           |
+| `icon`          | `String`                  | Url where the marker icon can been founded                                                                     |
+| `address`       | `String`                  | **Optional** Place address shown on marker popup                                                               |
+| `customPopup`   | `String`                  | **Optional** Custom popup content                                                                              |
+| `centerOnClick` | `Boolean`                 | **Optional** `Default: true` Center map to marker when clicked                                                 |
+| `position`      | `Object: {lat, lng}`      | Position (latitude, longitude) where the marker will be placed                                                 |
+| `size`          | `Object: {width, height}` | **Optional** `Default: {33, 44}` Marker size (width, height) in px                                             |
+| `anchor`        | `Object: {x, y}` | **Optional** `Default: {16, 44}` Marker anchor position, the icon will be centered by these values             |
+| `offset`        | `Object: {x, y}` | **Optional** `Default: {0, 0}` Marker popup offset position, the marker popup will be centered by these values |
 
 ## Usage/Examples
 

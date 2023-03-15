@@ -1,5 +1,10 @@
 # Release Notes
 
+## [[v1.6.1](https://github.com/edseto/map/releases/tag/1.6.1)]
+
+### Added
+- Add popup offset to marker [a701382](https://github.com/edseto/map/commit/a701382184d9f0f50cb598b43153cf171e9583a2)
+
 ## [[v1.6.0](https://github.com/edseto/map/releases/tag/1.6.0)]
 
 ### Added
