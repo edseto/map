@@ -23,6 +23,10 @@ const defaultMarkerOptions = {
         x: 16,
         y: 44,
     },
+    'offset': {
+        x: 0,
+        y: 0
+    }
 }
 
 class Map {
@@ -44,6 +48,8 @@ class Map {
      * @param {Number} markers[].size.height - Marker height
      * @param {Number} markers[].anchor.x - Marker anchor x
      * @param {Number} markers[].anchor.y - Marker anchor y
+     * @param {Number} markers[].offset.x - Marker offset x
+     * @param {Number} markers[].offset.y - Marker offset y
      */
     constructor(selector, options) {
         this.selector = selector
@@ -120,6 +126,8 @@ class Map {
      * @param {Number} marker.size.height - Marker height
      * @param {Number} marker.anchor.x - Marker anchor x
      * @param {Number} marker.anchor.y - Marker anchor y
+     * @param {Number} marker.offset.x - Marker popup offset x
+     * @param {Number} marker.offset.y - Marker popup offset y
      */
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
@@ -128,6 +136,7 @@ class Map {
         const { lat, lng } = marker.position
         const { width, height } = marker.size
         const { x: anchorX, y: anchorY } = marker.anchor
+        const { x: offsetX, y: offsetY } = marker.offset
         const markerIcon = L.icon({
             iconUrl: icon,
             iconSize: [width, height],
@@ -140,9 +149,13 @@ class Map {
         this.markers.push(mapMarker)
 
         if (customPopup) {
-            mapMarker.bindPopup(customPopup)
+            mapMarker.bindPopup(customPopup, {
+                offset: L.point(offsetX, offsetY)
+            })
         } else if (title || address) {
-            mapMarker.bindPopup(`<b>${title}</b><div>${address}</div>`)
+            mapMarker.bindPopup(`<b>${title}</b><div>${address}</div>`, {
+                offset: L.point(offsetX, offsetY)
+            })
         }
         
         this.#markerListener(mapMarker, marker.centerOnClick)
