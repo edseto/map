@@ -1,6 +1,12 @@
 import L from 'leaflet'
 import 'leaflet.markercluster'
 
+const defaultTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 20,
+    subdomains: 'abcd',
+    attribution: '&copy; <a target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a target="_blank" rel="noopener noreferrer" href="https://carto.com/attributions">CARTO</a>'
+})
+
 const defaultOptions = {
     mapOptions: {
         'zoom': 15,
@@ -8,6 +14,7 @@ const defaultOptions = {
         'scrollWheelZoom': false,
         'dragging': !L.Browser.mobile,
         'showCoverageOnHover': false,
+        'tileLayer': defaultTileLayer,
     }
 }
 
@@ -90,11 +97,7 @@ class Map {
     }
 
     #addTileLayer() {
-        this.tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            maxZoom: 20,
-            subdomains: 'abcd',
-            attribution: '&copy; <a target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a target="_blank" rel="noopener noreferrer" href="https://carto.com/attributions">CARTO</a>'
-        })
+        this.tileLayer = this.options.mapOptions.tileLayer
     }
 
     #addMarkerClusterLayer() {
