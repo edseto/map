@@ -1,5 +1,10 @@
 # Release Notes
 
+## [[v1.7.0](https://github.com/edseto/map/releases/tag/1.7.0)]
+
+### Added
+- Add tileLayer options parameter [d1cc4ce](https://github.com/edseto/map/commit/d1cc4ce5ab767ffbc9e85168f646ea79f3920cd7 )
+
 ## [[v1.6.1](https://github.com/edseto/map/releases/tag/1.6.1)]
 
 ### Added

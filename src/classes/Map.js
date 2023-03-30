@@ -1,6 +1,12 @@
 import L from 'leaflet'
 import 'leaflet.markercluster'
 
+const defaultTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 20,
+    subdomains: 'abcd',
+    attribution: '&copy; <a target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a target="_blank" rel="noopener noreferrer" href="https://carto.com/attributions">CARTO</a>'
+})
+
 const defaultOptions = {
     mapOptions: {
         'zoom': 15,
@@ -8,6 +14,7 @@ const defaultOptions = {
         'scrollWheelZoom': false,
         'dragging': !L.Browser.mobile,
         'showCoverageOnHover': false,
+        'tileLayer': defaultTileLayer,
     }
 }
 
@@ -35,7 +42,7 @@ class Map {
      * @constructor
      * @param {string} selector - Id of HTML container that will hold the map
      * @param {Object} options - Object with map options and markers to initialize the map
-     * @param {{lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean}} options.mapOptions - Options used to initializate the map
+     * @param {{lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean, tileLayer: L.TileLayer}} options.mapOptions - Options used to initializate the map
      * @param {{title: String, icon: String, address: String, position: { lat: Number, lng: Number}}[]} options.markers - Markers that will be added in the map
      * @param {String} markers[].title - Marker title and alt that describes the place
      * @param {String} markers[].icon - Url where the marker icon can been founded
@@ -90,11 +97,7 @@ class Map {
     }
 
     #addTileLayer() {
-        this.tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            maxZoom: 20,
-            subdomains: 'abcd',
-            attribution: '&copy; <a target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a target="_blank" rel="noopener noreferrer" href="https://carto.com/attributions">CARTO</a>'
-        })
+        this.tileLayer = this.options.mapOptions.tileLayer
     }
 
     #addMarkerClusterLayer() {

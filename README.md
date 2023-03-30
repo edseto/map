@@ -52,6 +52,7 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 | `zIndex` | `Number` | **Optional** `Default: 0` Map container z-index   |
 | `scrollWheelZoom` | `Boolean` | **Optional** `Default: false` Enable/disable zoom with mouse scroll   |
 | `showCoverageOnHover` | `Boolean` | **Optional** `Default: false` Enable/disable show markercluster coverage on hover   |
+| `tileLayer` | `L.TileLayer` | **Optional** Add custom [leaflet tileLayer](https://leafletjs.com/reference.html#tilelayer)   |
 
 #### markers object
 
