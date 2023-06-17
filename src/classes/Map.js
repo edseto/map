@@ -15,6 +15,7 @@ const defaultOptions = {
         'dragging': !L.Browser.mobile,
         'showCoverageOnHover': false,
         'tileLayer': defaultTileLayer,
+        'controlsPosition': 'topleft'
     }
 }
 
@@ -42,7 +43,7 @@ class Map {
      * @constructor
      * @param {string} selector - Id of HTML container that will hold the map
      * @param {Object} options - Object with map options and markers to initialize the map
-     * @param {{lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean, tileLayer: L.TileLayer}} options.mapOptions - Options used to initializate the map
+     * @param {{lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean, tileLayer: L.TileLayer, controlsPosition: String}} options.mapOptions - Options used to initializate the map
      * @param {{title: String, icon: String, address: String, position: { lat: Number, lng: Number}}[]} options.markers - Markers that will be added in the map
      * @param {String} markers[].title - Marker title and alt that describes the place
      * @param {String} markers[].icon - Url where the marker icon can been founded
@@ -85,9 +86,18 @@ class Map {
     }
 
     #initMap() {
-        const { lat, lng, zoom, zIndex, scrollWheelZoom, dragging } = this.options.mapOptions
+        const { lat, lng, zoom, zIndex, scrollWheelZoom, dragging, controlsPosition } = this.options.mapOptions
 
-        this.map = L.map(this.selector, { scrollWheelZoom: scrollWheelZoom, dragging: dragging }).setView([lat, lng], zoom)
+        this.map = L.map(this.selector, {
+            scrollWheelZoom: scrollWheelZoom,
+            dragging: dragging,
+            zoomControl: false,
+        }).setView([lat, lng], zoom)
+
+        L.control.zoom({
+            position: controlsPosition
+        }).addTo(this.map);
+
         this.map._container.style.zIndex = zIndex
         
         this.map.addLayer(this.tileLayer)
