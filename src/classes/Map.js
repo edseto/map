@@ -15,6 +15,7 @@ const defaultOptions = {
         'dragging': !L.Browser.mobile,
         'showCoverageOnHover': false,
         'tileLayer': defaultTileLayer,
+        'controlsPosition': 'topleft'
     }
 }
 
@@ -85,9 +86,18 @@ class Map {
     }
 
     #initMap() {
-        const { lat, lng, zoom, zIndex, scrollWheelZoom, dragging } = this.options.mapOptions
+        const { lat, lng, zoom, zIndex, scrollWheelZoom, dragging, controlsPosition } = this.options.mapOptions
 
-        this.map = L.map(this.selector, { scrollWheelZoom: scrollWheelZoom, dragging: dragging }).setView([lat, lng], zoom)
+        this.map = L.map(this.selector, {
+            scrollWheelZoom: scrollWheelZoom,
+            dragging: dragging,
+            zoomControl: false,
+        }).setView([lat, lng], zoom)
+
+        L.control.zoom({
+            position: controlsPosition
+        }).addTo(this.map);
+
         this.map._container.style.zIndex = zIndex
         
         this.map.addLayer(this.tileLayer)
