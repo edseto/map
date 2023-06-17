@@ -44,15 +44,16 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 
 #### mapOptions object
 
-| Parameter | Type     | Description                |
-| -------- | ------- | ------------------------- |
-| `lat` | `Number` | Latitude where the map will be placed |
-| `lng` | `Number` | Longitude where the map will be placed |
-| `zoom` | `Number` | **Optional** `Default: 15` Map zoom   |
-| `zIndex` | `Number` | **Optional** `Default: 0` Map container z-index   |
-| `scrollWheelZoom` | `Boolean` | **Optional** `Default: false` Enable/disable zoom with mouse scroll   |
-| `showCoverageOnHover` | `Boolean` | **Optional** `Default: false` Enable/disable show markercluster coverage on hover   |
-| `tileLayer` | `L.TileLayer` | **Optional** Add custom [leaflet tileLayer](https://leafletjs.com/reference.html#tilelayer)   |
+| Parameter | Type     | Description                                                                                 |
+| -------- | ------- |---------------------------------------------------------------------------------------------|
+| `lat` | `Number` | Latitude where the map will be placed                                                       |
+| `lng` | `Number` | Longitude where the map will be placed                                                      |
+| `zoom` | `Number` | **Optional** `Default: 15` Map zoom                                                         |
+| `zIndex` | `Number` | **Optional** `Default: 0` Map container z-index                                             |
+| `scrollWheelZoom` | `Boolean` | **Optional** `Default: false` Enable/disable zoom with mouse scroll                         |
+| `showCoverageOnHover` | `Boolean` | **Optional** `Default: false` Enable/disable show markercluster coverage on hover           |
+| `tileLayer` | `L.TileLayer` | **Optional** Add custom [leaflet tileLayer](https://leafletjs.com/reference.html#tilelayer) |
+| `controlsPosition` | `String` | **Optional** `Default: topleft` Position where zoom controls will be placed (one of the map corners). Possible values are `topleft`, `topright`, `bottomleft` or `bottomright`                |
 
 #### markers object
 

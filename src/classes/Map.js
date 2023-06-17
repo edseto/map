@@ -43,7 +43,7 @@ class Map {
      * @constructor
      * @param {string} selector - Id of HTML container that will hold the map
      * @param {Object} options - Object with map options and markers to initialize the map
-     * @param {{lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean, tileLayer: L.TileLayer}} options.mapOptions - Options used to initializate the map
+     * @param {{lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean, tileLayer: L.TileLayer, controlsPosition: String}} options.mapOptions - Options used to initializate the map
      * @param {{title: String, icon: String, address: String, position: { lat: Number, lng: Number}}[]} options.markers - Markers that will be added in the map
      * @param {String} markers[].title - Marker title and alt that describes the place
      * @param {String} markers[].icon - Url where the marker icon can been founded
