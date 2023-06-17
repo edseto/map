@@ -1,9 +1,14 @@
 # Release Notes
 
+## [[v1.7.1](https://github.com/edseto/map/releases/tag/1.7.1)]
+
+### Added
+- Add controls position option [8eca8d2](https://github.com/edseto/map/commit/8eca8d244b6b1da432dd5e6fcd00c5a9588585cb)
+
 ## [[v1.7.0](https://github.com/edseto/map/releases/tag/1.7.0)]
 
 ### Added
-- Add tileLayer options parameter [d1cc4ce](https://github.com/edseto/map/commit/d1cc4ce5ab767ffbc9e85168f646ea79f3920cd7 )
+- Add tileLayer options parameter [d1cc4ce](https://github.com/edseto/map/commit/d1cc4ce5ab767ffbc9e85168f646ea79f3920cd7)
 
 ## [[v1.6.1](https://github.com/edseto/map/releases/tag/1.6.1)]
 
@@ -14,11 +19,11 @@
 
 ### Added
 - Add remove marker method [e3705c5](https://github.com/edseto/map/commit/e3705c53578e6fb735565162f3ca08c44b557198)
-- Add anchor to set coordinates on icon base point [c74ec3e](https://github.com/edseto/map/commit/c74ec3efb78532c4aa8d828fde2146dea70faab6 )
+- Add anchor to set coordinates on icon base point [c74ec3e](https://github.com/edseto/map/commit/c74ec3efb78532c4aa8d828fde2146dea70faab6)
 
 ### Fixed
 - Refactor default options to keep default mapOptions and avoid losing default attributes not present in incoming options [68f4753](https://github.com/edseto/map/commit/68f4753c83249ad12ea1384a421b266a2f2c5fa3)
-- Prevent zoom on scroll in mobile by setting the dragging option [cb01179](https://github.com/edseto/map/commit/cb01179a4bcccaa55a7341950c6884041eb1a4f5 )
+- Prevent zoom on scroll in mobile by setting the dragging option [cb01179](https://github.com/edseto/map/commit/cb01179a4bcccaa55a7341950c6884041eb1a4f5)
 
 ## [[v1.5.0](https://github.com/edseto/map/releases/tag/1.5.0)]
 
