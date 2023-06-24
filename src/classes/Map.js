@@ -1,5 +1,7 @@
 import L from 'leaflet'
 import 'leaflet.markercluster'
+import 'leaflet-routing-machine'
+import 'leaflet-control-geocoder'
 
 const defaultTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 20,
@@ -16,6 +18,14 @@ const defaultOptions = {
         'showCoverageOnHover': false,
         'tileLayer': defaultTileLayer,
         'controlsPosition': 'topleft'
+    },
+    routingOptions: {
+        'enable': false,
+        'language': 'en',
+        'showAlternatives': false,
+        'reverseWaypoints': false,
+        'fitSelectedRoutes': true,
+        'styles': [{}],
     }
 }
 
@@ -42,22 +52,9 @@ class Map {
      * Create and insert a Leaflet Map into HTML containers
      * @constructor
      * @param {string} selector - Id of HTML container that will hold the map
-     * @param {Object} options - Object with map options and markers to initialize the map
-     * @param {{lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean, tileLayer: L.TileLayer, controlsPosition: String}} options.mapOptions - Options used to initializate the map
-     * @param {{title: String, icon: String, address: String, position: { lat: Number, lng: Number}}[]} options.markers - Markers that will be added in the map
-     * @param {String} markers[].title - Marker title and alt that describes the place
-     * @param {String} markers[].icon - Url where the marker icon can been founded
-     * @param {String} markers[].address - Address shown on marker popup
-     * @param {String} markers[].centerOnClick - Center map to marker when clicked
-     * @param {String} markers[].customPopup - Custom popup content
-     * @param {Number} markers[].position.lat - Latitude where the marker will be placed
-     * @param {Number} markers[].position.lng - Longitude where the marker will be placed
-     * @param {Number} markers[].size.width - Marker width
-     * @param {Number} markers[].size.height - Marker height
-     * @param {Number} markers[].anchor.x - Marker anchor x
-     * @param {Number} markers[].anchor.y - Marker anchor y
-     * @param {Number} markers[].offset.x - Marker offset x
-     * @param {Number} markers[].offset.y - Marker offset y
+     * @param {{mapOptions: {lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean, tileLayer: L.TileLayer, controlsPosition: String},
+     * markers: [{title: String, icon: String, address: String, position: { lat: Number, lng: Number}, size: { width: Number, height: Number}, anchor: { x: Number, y: Number}, offset: { x: Number, y: Number}}],
+     * routingOptions: {enable: boolean, language: String, showAlternatives: boolean, reverseWaypoints: boolean, fitSelectedRoutes: string/boolean, markerOptions: object}}} options - Object with map options and markers to initialize the map
      */
     constructor(selector, options) {
         this.selector = selector
@@ -68,6 +65,10 @@ class Map {
                 ...defaultOptions.mapOptions,
                 ...options.mapOptions,
             },
+            routingOptions: {
+                ...defaultOptions.routingOptions,
+                ...options.routingOptions,
+            }
         }
 
         this.map = null
@@ -83,6 +84,10 @@ class Map {
             this.addMarker(marker)
         })
         this.#initMap()
+
+        if(this.options.routingOptions.enable) {
+            this.#addRouting()
+        }
     }
 
     #initMap() {
@@ -110,6 +115,35 @@ class Map {
         this.tileLayer = this.options.mapOptions.tileLayer
     }
 
+    #addRouting() {
+        const { lat, lng } = this.options.mapOptions
+        const { language, showAlternatives, reverseWaypoints, fitSelectedRoutes, styles } = this.options.routingOptions
+        const destination = new L.LatLng(lat, lng)
+        const waypoints = [null, destination]
+
+        const marker = { ...defaultMarkerOptions, ...this.options.routingOptions.markerOptions }
+        const icon = this.#createIcon(marker)
+
+        L.Routing.control({
+            language: language === 'ca' ? 'es' : language, /* ca lang not supported */
+            geocoder: L.Control.Geocoder.nominatim(),
+            showAlternatives,
+            reverseWaypoints,
+            fitSelectedRoutes,
+
+            lineOptions: {
+                addWaypoints: false,
+                styles,
+            },
+            createMarker: function(i, waypoint) {
+                return L.marker(waypoint.latLng, {
+                    icon
+                })
+            },
+            waypoints,
+        }).addTo(this.map)
+    }
+
     #addMarkerClusterLayer() {
         const { showCoverageOnHover } = this.options.mapOptions
         this.markerCluster = L.markerClusterGroup({ showCoverageOnHover: showCoverageOnHover})
@@ -122,6 +156,19 @@ class Map {
             this.map._container.querySelector('.leaflet-popup-close-button')?.addEventListener('click', (ev) => {
                 ev.preventDefault()
             })
+        })
+    }
+
+    #createIcon(marker) {
+        const { icon } = marker
+        const { width, height } = marker.size
+        const { x: anchorX, y: anchorY } = marker.anchor
+
+        return L.icon({
+            iconUrl: icon,
+            iconSize: [width, height],
+            iconAnchor: [anchorX, anchorY],
+            riseOnHover: true,
         })
     }
 
@@ -145,17 +192,10 @@ class Map {
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
 
-        const { title, icon, address, customPopup } = marker
+        const { title, address, customPopup } = marker
         const { lat, lng } = marker.position
-        const { width, height } = marker.size
-        const { x: anchorX, y: anchorY } = marker.anchor
         const { x: offsetX, y: offsetY } = marker.offset
-        const markerIcon = L.icon({
-            iconUrl: icon,
-            iconSize: [width, height],
-            iconAnchor: [anchorX, anchorY],
-            riseOnHover: true,
-        })
+        const markerIcon = this.#createIcon(marker)
 
         const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.markerCluster)
 
