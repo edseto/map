@@ -125,6 +125,19 @@ class Map {
         })
     }
 
+    #createIcon(marker) {
+        const { icon } = marker
+        const { width, height } = marker.size
+        const { x: anchorX, y: anchorY } = marker.anchor
+
+        return L.icon({
+            iconUrl: icon,
+            iconSize: [width, height],
+            iconAnchor: [anchorX, anchorY],
+            riseOnHover: true,
+        })
+    }
+
     /**
      * Add a new marker to the map
      * @param {Object} marker - Marker that will be added in the map
@@ -145,17 +158,10 @@ class Map {
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
 
-        const { title, icon, address, customPopup } = marker
+        const { title, address, customPopup } = marker
         const { lat, lng } = marker.position
-        const { width, height } = marker.size
-        const { x: anchorX, y: anchorY } = marker.anchor
         const { x: offsetX, y: offsetY } = marker.offset
-        const markerIcon = L.icon({
-            iconUrl: icon,
-            iconSize: [width, height],
-            iconAnchor: [anchorX, anchorY],
-            riseOnHover: true,
-        })
+        const markerIcon = this.#createIcon(marker)
 
         const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.markerCluster)
 
