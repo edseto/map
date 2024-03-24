@@ -1,5 +1,16 @@
 # Release Notes
 
+## [[v1.8.1](https://github.com/edseto/map/releases/tag/1.8.1)]
+
+### Updated
+- Update dependencies [8f62dbe](https://github.com/edseto/map/commit/8f62dbef32d63b6229fdd315d88cb7142ee3c587)
+
+## [[v1.8.0](https://github.com/edseto/map/releases/tag/1.8.0)]
+
+### Added
+- Add leaflet routing machine [981046a](https://github.com/edseto/map/commit/981046a63ea2e648463dbfb667cb14f07da8764b)
+- Add create icon method [487d965](https://github.com/edseto/map/commit/487d965effb68bd1bdc93371d62824d055354193)
+
 ## [[v1.7.1](https://github.com/edseto/map/releases/tag/1.7.1)]
 
 ### Added
