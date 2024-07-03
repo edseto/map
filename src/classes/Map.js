@@ -1,4 +1,4 @@
-import L from 'leaflet'
+import L, { divIcon } from 'leaflet'
 import 'leaflet.markercluster'
 import 'leaflet-routing-machine'
 import 'leaflet-control-geocoder'
@@ -53,7 +53,7 @@ class Map {
      * @constructor
      * @param {string} selector - Id of HTML container that will hold the map
      * @param {{mapOptions: {lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean, tileLayer: L.TileLayer, controlsPosition: String},
-     * markers: [{title: String, icon: String, address: String, position: { lat: Number, lng: Number}, size: { width: Number, height: Number}, anchor: { x: Number, y: Number}, offset: { x: Number, y: Number}}],
+     * markers: [{title: String, icon: String, divIcon: String | HTMLElement, address: String, position: { lat: Number, lng: Number}, size: { width: Number, height: Number}, anchor: { x: Number, y: Number}, offset: { x: Number, y: Number}}],
      * routingOptions: {enable: boolean, language: String, showAlternatives: boolean, reverseWaypoints: boolean, fitSelectedRoutes: string/boolean, markerOptions: object}}} options - Object with map options and markers to initialize the map
      */
     constructor(selector, options) {
@@ -160,16 +160,27 @@ class Map {
     }
 
     #createIcon(marker) {
-        const { icon } = marker
+        const { icon, divIcon } = marker
         const { width, height } = marker.size
         const { x: anchorX, y: anchorY } = marker.anchor
 
-        return L.icon({
-            iconUrl: icon,
-            iconSize: [width, height],
-            iconAnchor: [anchorX, anchorY],
-            riseOnHover: true,
-        })
+        if (divIcon) {
+            return L.divIcon({
+                html: divIcon,
+                iconSize: [width, height],
+                iconAnchor: [anchorX, anchorY],
+                riseOnHover: true,
+            })
+        }
+
+        if (icon) {
+            return L.icon({
+                iconUrl: icon,
+                iconSize: [width, height],
+                iconAnchor: [anchorX, anchorY],
+                riseOnHover: true,
+            })
+        }
     }
 
     /**
@@ -177,6 +188,7 @@ class Map {
      * @param {Object} marker - Marker that will be added in the map
      * @param {String} marker.title - Marker title and alt that describes the place
      * @param {String} marker.icon - Url where can the marker icon been founded
+     * @param {String | HTMLElement} marker.divIcon - Custom marker HTML
      * @param {String} marker.address - Address shown on marker popup
      * @param {String} marker.customPopup - Custom popup content
      * @param {boolean} marker.centerOnClick - Center map to marker when clicked
