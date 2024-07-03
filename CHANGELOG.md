@@ -1,5 +1,11 @@
 # Release Notes
 
+## [[v1.9.0](https://github.com/edseto/map/releases/tag/1.9.0)]
+
+### Added
+- Add divIcon variable [0ea67f8](https://github.com/edseto/map/commit/0ea67f8c6b3c9d0f73fe3989240a40d2d1cae4b2)
+- Add divIcon option [4378b22](https://github.com/edseto/map/commit/4378b2234cdc8f6e2c858b66a41cbed9fc4e8d98)
+
 ## [[v1.8.1](https://github.com/edseto/map/releases/tag/1.8.1)]
 
 ### Updated
