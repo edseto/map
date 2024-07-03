@@ -1,4 +1,4 @@
-import L from 'leaflet'
+import L, { divIcon } from 'leaflet'
 import 'leaflet.markercluster'
 import 'leaflet-routing-machine'
 import 'leaflet-control-geocoder'
@@ -164,12 +164,23 @@ class Map {
         const { width, height } = marker.size
         const { x: anchorX, y: anchorY } = marker.anchor
 
-        return L.icon({
-            iconUrl: icon,
-            iconSize: [width, height],
-            iconAnchor: [anchorX, anchorY],
-            riseOnHover: true,
-        })
+        if (marker.divIcon) {
+            return L.divIcon({
+                html: marker.divIcon,
+                iconSize: [width, height],
+                iconAnchor: [anchorX, anchorY],
+                riseOnHover: true,
+            })
+        }
+
+        if (icon) {
+            return L.icon({
+                iconUrl: icon,
+                iconSize: [width, height],
+                iconAnchor: [anchorX, anchorY],
+                riseOnHover: true,
+            })
+        }
     }
 
     /**
