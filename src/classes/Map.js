@@ -53,7 +53,7 @@ class Map {
      * @constructor
      * @param {string} selector - Id of HTML container that will hold the map
      * @param {{mapOptions: {lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean, tileLayer: L.TileLayer, controlsPosition: String},
-     * markers: [{title: String, icon: String, divIcon: String | HTMLElement, address: String, hotelId: Number, hidePopup: boolean, position: { lat: Number, lng: Number}, size: { width: Number, height: Number}, anchor: { x: Number, y: Number}, offset: { x: Number, y: Number}}],
+     * markers: [{title: String, icon: String, divIcon: String | HTMLElement, address: String, elementId: Number, hidePopup: boolean, position: { lat: Number, lng: Number}, size: { width: Number, height: Number}, anchor: { x: Number, y: Number}, offset: { x: Number, y: Number}}],
      * routingOptions: {enable: boolean, language: String, showAlternatives: boolean, reverseWaypoints: boolean, fitSelectedRoutes: string/boolean, markerOptions: object}}} options - Object with map options and markers to initialize the map
      */
     constructor(selector, options) {
@@ -190,7 +190,7 @@ class Map {
      * @param {String} marker.icon - Url where can the marker icon been founded
      * @param {String | HTMLElement} marker.divIcon - Custom marker HTML
      * @param {String} marker.address - Address shown on marker popup
-     * @param {Number} marker.hotelId - Id of the hotel associated
+     * @param {Number} marker.elementId - Id of the element associated
      * @param {String} marker.customPopup - Custom popup content
      * @param {boolean} marker.hidePopup - Hide popup (Only if there is no customPopup)
      * @param {boolean} marker.centerOnClick - Center map to marker when clicked
@@ -206,12 +206,12 @@ class Map {
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
  
-        const { title, address, customPopup, hidePopup, hotelId } = marker
+        const { title, address, customPopup, hidePopup, elementId } = marker
         const { lat, lng } = marker.position
         const { x: offsetX, y: offsetY } = marker.offset
         const markerIcon = this.#createIcon(marker)
 
-        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title, hotelId: hotelId}).addTo(this.markerCluster)
+        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title, elementId: elementId}).addTo(this.markerCluster)
 
         this.markers.push(mapMarker)
 
