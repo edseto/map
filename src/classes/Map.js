@@ -53,7 +53,7 @@ class Map {
      * @constructor
      * @param {string} selector - Id of HTML container that will hold the map
      * @param {{mapOptions: {lat: Number, lng: Number, zoom: Number, zIndex: Number, scrollWheelZoom: boolean, showCoverageOnHover: boolean, tileLayer: L.TileLayer, controlsPosition: String},
-     * markers: [{title: String, icon: String, divIcon: String | HTMLElement, address: String, position: { lat: Number, lng: Number}, size: { width: Number, height: Number}, anchor: { x: Number, y: Number}, offset: { x: Number, y: Number}}],
+     * markers: [{title: String, icon: String, divIcon: String | HTMLElement, address: String, hotelId: Number, hidePopup: boolean, position: { lat: Number, lng: Number}, size: { width: Number, height: Number}, anchor: { x: Number, y: Number}, offset: { x: Number, y: Number}}],
      * routingOptions: {enable: boolean, language: String, showAlternatives: boolean, reverseWaypoints: boolean, fitSelectedRoutes: string/boolean, markerOptions: object}}} options - Object with map options and markers to initialize the map
      */
     constructor(selector, options) {
