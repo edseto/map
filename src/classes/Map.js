@@ -190,7 +190,9 @@ class Map {
      * @param {String} marker.icon - Url where can the marker icon been founded
      * @param {String | HTMLElement} marker.divIcon - Custom marker HTML
      * @param {String} marker.address - Address shown on marker popup
+     * @param {Number} marker.hotelId - Id of the hotel associated
      * @param {String} marker.customPopup - Custom popup content
+     * @param {boolean} marker.hidePopup - Hide popup (Only if there is no customPopup)
      * @param {boolean} marker.centerOnClick - Center map to marker when clicked
      * @param {Number} marker.position.lat - Latitude where the marker will be placed
      * @param {Number} marker.position.lng - Longitude where the marker will be placed
@@ -203,13 +205,13 @@ class Map {
      */
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
-
-        const { title, address, customPopup } = marker
+ 
+        const { title, address, customPopup, hidePopup, hotelId } = marker
         const { lat, lng } = marker.position
         const { x: offsetX, y: offsetY } = marker.offset
         const markerIcon = this.#createIcon(marker)
 
-        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title}).addTo(this.markerCluster)
+        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title, hotelId: hotelId}).addTo(this.markerCluster)
 
         this.markers.push(mapMarker)
 
@@ -217,7 +219,7 @@ class Map {
             mapMarker.bindPopup(customPopup, {
                 offset: L.point(offsetX, offsetY)
             })
-        } else if (title || address) {
+        } else if ((title || address) && !hidePopup ) {
             mapMarker.bindPopup(`<b>${title}</b><div>${address}</div>`, {
                 offset: L.point(offsetX, offsetY)
             })
