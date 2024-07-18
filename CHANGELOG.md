@@ -1,5 +1,11 @@
 # Release Notes
 
+## [[v1.10.0](https://github.com/edseto/map/releases/tag/1.10.0)]
+
+### Added
+- Change hotelId param name to elementId to make it more generic [76c5834](https://github.com/edseto/map/commit/76c5834603a4cfacd3373e2253033a13833fe8e9)
+- Add hidePopup and hotelId parameters to marker [1bf9815](https://github.com/edseto/map/commit/1bf981574fd722e9cee544bd3f3e66fecb433ecc)
+
 ## [[v1.9.0](https://github.com/edseto/map/releases/tag/1.9.0)]
 
 ### Added
