@@ -64,7 +64,7 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 | `title`         | `String`                  | **Optional** Marker title and alt that describes the place and shown on marker popup                           |
 | `icon`          | `String`                  | Url where the marker icon can been founded                                                                     |
 | `divIcon`       | `String \| HTMLElement`   | **Optional** Custom marker HTML                                                                                |
-| `hotelId`       | `Number`                  | **Optional** Hotel id which the marker references                                                              |
+| `elementId`     | `Number`                  | **Optional** Element id which the marker references                                                              |
 | `address`       | `String`                  | **Optional** Place address shown on marker popup                                                               |
 | `hidePopup`     | `Boolean`                 | **Optional** `Default: false` Hides the marker popup                                                           |
 | `customPopup`   | `String`                  | **Optional** Custom popup content                                                                              |
