@@ -1,10 +1,16 @@
 # Release Notes
 
+## [[v1.10.2](https://github.com/edseto/map/releases/tag/1.10.2)]
+
+### Updated
+
+- Update dependencies [4a292ba](https://github.com/edseto/map/commit/4a292bab2b6df48e600b2ba731c112d21c2208a0)
+
 ## [[v1.10.1](https://github.com/edseto/map/releases/tag/1.10.1)]
 
 ### Updated
 
-- Update dependencies [6c22c08](https://github.com/edseto/map/commit/6c22c081c0187753d9587fa8b145cb5f06d53f27 )
+- Update dependencies [6c22c08](https://github.com/edseto/map/commit/6c22c081c0187753d9587fa8b145cb5f06d53f27)
 
 ## [[v1.10.0](https://github.com/edseto/map/releases/tag/1.10.0)]
 
