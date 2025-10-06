@@ -17,7 +17,17 @@ const defaultOptions = {
         'dragging': !L.Browser.mobile,
         'showCoverageOnHover': false,
         'tileLayer': defaultTileLayer,
-        'controlsPosition': 'topleft'
+        'controls': {
+            'position': 'topleft',
+            'zoomIn': {
+                'text': '+',
+                'title': 'Zoom in',
+            },
+            'zoomOut': {
+                'text': '-',
+                'title': 'Zoom out',
+            }
+        },
     },
     routingOptions: {
         'enable': false,
@@ -91,7 +101,10 @@ class Map {
     }
 
     #initMap() {
-        const { lat, lng, zoom, zIndex, scrollWheelZoom, dragging, controlsPosition } = this.options.mapOptions
+        const { lat, lng, zoom, zIndex, scrollWheelZoom, dragging } = this.options.mapOptions
+        const { position: controlsPosition } = this.options.mapOptions.controls
+        const { zoomIn } = this.options.mapOptions.zoomIn
+        const { zoomOut } = this.options.mapOptions.zoomOut
 
         this.map = L.map(this.selector, {
             scrollWheelZoom: scrollWheelZoom,
@@ -100,11 +113,15 @@ class Map {
         }).setView([lat, lng], zoom)
 
         L.control.zoom({
-            position: controlsPosition
+            position: controlsPosition,
+            zoomInText: zoomIn.text,
+            zoomInTitle: zoomIn.title,
+            zoomOutText: zoomOut.text,
+            zoomOutTitle: zoomOut.title,
         }).addTo(this.map);
 
         this.map._container.style.zIndex = zIndex
-        
+
         this.map.addLayer(this.tileLayer)
         this.map.addLayer(this.markerCluster)
         this.map.fitBounds(this.markerCluster.getBounds())
@@ -205,7 +222,7 @@ class Map {
      */
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
- 
+
         const { title, address, customPopup, hidePopup, elementId } = marker
         const { lat, lng } = marker.position
         const { x: offsetX, y: offsetY } = marker.offset
@@ -224,7 +241,7 @@ class Map {
                 offset: L.point(offsetX, offsetY)
             })
         }
-        
+
         this.#markerListener(mapMarker, marker.centerOnClick)
     }
 
