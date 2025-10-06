@@ -12,6 +12,8 @@ const defaultTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_al
 const defaultOptions = {
     mapOptions: {
         'zoom': 15,
+        'minZoom': 4,
+        'maxZoom': 20,
         'zIndex': 0,
         'scrollWheelZoom': false,
         'dragging': !L.Browser.mobile,
@@ -91,12 +93,14 @@ class Map {
     }
 
     #initMap() {
-        const { lat, lng, zoom, zIndex, scrollWheelZoom, dragging, controlsPosition } = this.options.mapOptions
+        const { lat, lng, zoom, minZoom, maxZoom, zIndex, scrollWheelZoom, dragging, controlsPosition } = this.options.mapOptions
 
         this.map = L.map(this.selector, {
             scrollWheelZoom: scrollWheelZoom,
             dragging: dragging,
             zoomControl: false,
+            minZoom: minZoom,
+            maxZoom: maxZoom,
         }).setView([lat, lng], zoom)
 
         L.control.zoom({
@@ -104,7 +108,7 @@ class Map {
         }).addTo(this.map);
 
         this.map._container.style.zIndex = zIndex
-        
+
         this.map.addLayer(this.tileLayer)
         this.map.addLayer(this.markerCluster)
         this.map.fitBounds(this.markerCluster.getBounds())
@@ -205,7 +209,7 @@ class Map {
      */
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
- 
+
         const { title, address, customPopup, hidePopup, elementId } = marker
         const { lat, lng } = marker.position
         const { x: offsetX, y: offsetY } = marker.offset
@@ -224,7 +228,7 @@ class Map {
                 offset: L.point(offsetX, offsetY)
             })
         }
-        
+
         this.#markerListener(mapMarker, marker.centerOnClick)
     }
 
