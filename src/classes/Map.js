@@ -44,6 +44,11 @@ const defaultMarkerOptions = {
     'offset': {
         x: 0,
         y: 0
+    },
+    'customLink': {
+        'enable': false,
+        'href': '',
+        'target': '_blank',
     }
 }
 
@@ -104,7 +109,7 @@ class Map {
         }).addTo(this.map);
 
         this.map._container.style.zIndex = zIndex
-        
+
         this.map.addLayer(this.tileLayer)
         this.map.addLayer(this.markerCluster)
         this.map.fitBounds(this.markerCluster.getBounds())
@@ -202,18 +207,29 @@ class Map {
      * @param {Number} marker.anchor.y - Marker anchor y
      * @param {Number} marker.offset.x - Marker popup offset x
      * @param {Number} marker.offset.y - Marker popup offset y
+     * @param {Boolean} marker.customLink.enable - Enable open custom link on click marker
+     * @param {String} marker.customLink.href - Custom link that will be opened on click marker
+     * @param {String} marker.customLink.target - Custom link target
      */
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
- 
+
         const { title, address, customPopup, hidePopup, elementId } = marker
         const { lat, lng } = marker.position
         const { x: offsetX, y: offsetY } = marker.offset
+        const { enable: customLinkEnabled, href: customLinkHref, target: customLinkTarget} = marker.customLink
         const markerIcon = this.#createIcon(marker)
 
         const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title, elementId: elementId}).addTo(this.markerCluster)
 
         this.markers.push(mapMarker)
+
+        if (customLinkEnabled) {
+            mapMarker.on('click', function () {
+                const url = `https://maps.google.com/?q=${lat},${lng}`
+                window.open(customLinkHref ?? url, customLinkTarget)
+            })
+        }
 
         if (customPopup) {
             mapMarker.bindPopup(customPopup, {
@@ -224,7 +240,7 @@ class Map {
                 offset: L.point(offsetX, offsetY)
             })
         }
-        
+
         this.#markerListener(mapMarker, marker.centerOnClick)
     }
 
