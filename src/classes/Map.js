@@ -44,7 +44,10 @@ const defaultMarkerOptions = {
     'offset': {
         x: 0,
         y: 0
-    }
+    },
+    'zIndexOffset': 0,
+    'opacity': 1.0,
+    'riseOnHover': false,
 }
 
 class Map {
@@ -104,7 +107,7 @@ class Map {
         }).addTo(this.map);
 
         this.map._container.style.zIndex = zIndex
-        
+
         this.map.addLayer(this.tileLayer)
         this.map.addLayer(this.markerCluster)
         this.map.fitBounds(this.markerCluster.getBounds())
@@ -205,13 +208,21 @@ class Map {
      */
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
- 
-        const { title, address, customPopup, hidePopup, elementId } = marker
+
+        const { title, address, customPopup, hidePopup, elementId, zIndexOffset, opacity, riseOnHover } = marker
         const { lat, lng } = marker.position
         const { x: offsetX, y: offsetY } = marker.offset
         const markerIcon = this.#createIcon(marker)
 
-        const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title, elementId: elementId}).addTo(this.markerCluster)
+        const mapMarker = L.marker([lat, lng], {
+            icon: markerIcon,
+            alt: title,
+            title: title,
+            elementId: elementId,
+            zIndexOffset: zIndexOffset,
+            opacity: opacity,
+            riseOnHover: riseOnHover,
+        }).addTo(this.markerCluster)
 
         this.markers.push(mapMarker)
 
@@ -224,7 +235,7 @@ class Map {
                 offset: L.point(offsetX, offsetY)
             })
         }
-        
+
         this.#markerListener(mapMarker, marker.centerOnClick)
     }
 
