@@ -44,6 +44,11 @@ const defaultMarkerOptions = {
     'offset': {
         x: 0,
         y: 0
+    },
+    'tooltip': {
+        'direction': 'top',
+        'sticky': false,
+        'opacity': 1.0
     }
 }
 
@@ -104,7 +109,7 @@ class Map {
         }).addTo(this.map);
 
         this.map._container.style.zIndex = zIndex
-        
+
         this.map.addLayer(this.tileLayer)
         this.map.addLayer(this.markerCluster)
         this.map.fitBounds(this.markerCluster.getBounds())
@@ -205,8 +210,9 @@ class Map {
      */
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
- 
+
         const { title, address, customPopup, hidePopup, elementId } = marker
+        const { direction: tooltipDirection, sticky: tooltipSticky, opacity: tooltipOpacity } = marker.tooltip
         const { lat, lng } = marker.position
         const { x: offsetX, y: offsetY } = marker.offset
         const markerIcon = this.#createIcon(marker)
@@ -220,11 +226,14 @@ class Map {
                 offset: L.point(offsetX, offsetY)
             })
         } else if ((title || address) && !hidePopup ) {
-            mapMarker.bindPopup(`<b>${title}</b><div>${address}</div>`, {
-                offset: L.point(offsetX, offsetY)
+            mapMarker.bindTooltip(`<b>${title}</b><div>${address}</div>`, {
+                offset: L.point(offsetX, offsetY),
+                direction: tooltipDirection,
+                sticky: tooltipSticky,
+                opacity: tooltipOpacity
             })
         }
-        
+
         this.#markerListener(mapMarker, marker.centerOnClick)
     }
 
