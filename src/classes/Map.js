@@ -23,6 +23,7 @@ const defaultMarkerOptions = {
         x: 16,
         y: 44,
     },
+    'showPopup': true,
 }
 
 class Map {
@@ -36,7 +37,8 @@ class Map {
      * @param {String} markers[].title - Marker title and alt that describes the place
      * @param {String} markers[].icon - Url where the marker icon can been founded
      * @param {String} markers[].address - Address shown on marker popup
-     * @param {String} markers[].centerOnClick - Center map to marker when clicked
+     * @param {Boolean} markers[].showPopup - Choose whether show marker popup or not
+     * @param {Boolean} markers[].centerOnClick - Center map to marker when clicked
      * @param {String} markers[].customPopup - Custom popup content
      * @param {Number} markers[].position.lat - Latitude where the marker will be placed
      * @param {Number} markers[].position.lng - Longitude where the marker will be placed
@@ -76,7 +78,7 @@ class Map {
 
         this.map = L.map(this.selector, { scrollWheelZoom: scrollWheelZoom, dragging: dragging }).setView([lat, lng], zoom)
         this.map._container.style.zIndex = zIndex
-        
+
         this.map.addLayer(this.tileLayer)
         this.map.addLayer(this.markerCluster)
         this.map.fitBounds(this.markerCluster.getBounds())
@@ -113,6 +115,7 @@ class Map {
      * @param {String} marker.icon - Url where can the marker icon been founded
      * @param {String} marker.address - Address shown on marker popup
      * @param {String} marker.customPopup - Custom popup content
+     * @param {boolean} marker.showPopup - Choose whether show marker popup or not
      * @param {boolean} marker.centerOnClick - Center map to marker when clicked
      * @param {Number} marker.position.lat - Latitude where the marker will be placed
      * @param {Number} marker.position.lng - Longitude where the marker will be placed
@@ -124,7 +127,7 @@ class Map {
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
 
-        const { title, icon, address, customPopup } = marker
+        const { title, icon, showPopup } = marker
         const { lat, lng } = marker.position
         const { width, height } = marker.size
         const { x: anchorX, y: anchorY } = marker.anchor
@@ -139,13 +142,21 @@ class Map {
 
         this.markers.push(mapMarker)
 
+        if (showPopup) {
+            this.addPopup(marker, mapMarker)
+        }
+
+        this.#markerListener(mapMarker, marker.centerOnClick)
+    }
+
+    addPopup(marker, mapMarker) {
+        const { title, address, customPopup } = marker
+
         if (customPopup) {
             mapMarker.bindPopup(customPopup)
         } else if (title || address) {
             mapMarker.bindPopup(`<b>${title}</b><div>${address}</div>`)
         }
-        
-        this.#markerListener(mapMarker, marker.centerOnClick)
     }
 
     removeMarker(index) {

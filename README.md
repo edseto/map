@@ -44,27 +44,28 @@ Is not a npm public package yet, maybe in the future I'll publish it there, mean
 
 #### mapOptions object
 
-| Parameter | Type     | Description                |
-| -------- | ------- | ------------------------- |
-| `lat` | `Number` | Latitude where the map will be placed |
-| `lng` | `Number` | Longitude where the map will be placed |
-| `zoom` | `Number` | **Optional** `Default: 15` Map zoom   |
-| `zIndex` | `Number` | **Optional** `Default: 0` Map container z-index   |
-| `scrollWheelZoom` | `Boolean` | **Optional** `Default: false` Enable/disable zoom with mouse scroll   |
-| `showCoverageOnHover` | `Boolean` | **Optional** `Default: false` Enable/disable show markercluster coverage on hover   |
+| Parameter             | Type      | Description                                                                       |
+|-----------------------|-----------|-----------------------------------------------------------------------------------|
+| `lat`                 | `Number`  | Latitude where the map will be placed                                             |
+| `lng`                 | `Number`  | Longitude where the map will be placed                                            |
+| `zoom`                | `Number`  | **Optional** `Default: 15` Map zoom                                               |
+| `zIndex`              | `Number`  | **Optional** `Default: 0` Map container z-index                                   |
+| `scrollWheelZoom`     | `Boolean` | **Optional** `Default: false` Enable/disable zoom with mouse scroll               |
+| `showCoverageOnHover` | `Boolean` | **Optional** `Default: false` Enable/disable show markercluster coverage on hover |
 
 #### markers object
 
-| Parameter | Type                      | Description                                                                          |
-| -------- |---------------------------|--------------------------------------------------------------------------------------|
-| `title` | `String`                  | **Optional** Marker title and alt that describes the place and shown on marker popup |
-| `icon` | `String`                  | Url where the marker icon can been founded                                           |
-| `address` | `String`                  | **Optional** Place address shown on marker popup                                     |
-| `customPopup` | `String`                  | **Optional** Custom popup content                                                    |
-| `centerOnClick` | `Boolean`                 | **Optional** `Default: true` Center map to marker when clicked                                    |
-| `position` | `Object: {lat, lng}`      | Position (latitude, longitude) where the marker will be placed                       |
-| `size` | `Object: {width, height}` | **Optional** `Default: {33, 44}` Marker size (width, height) in px                   |
-| `anchor` | `Object: {x, y}` | **Optional** `Default: {16, 44}` Marker anchor position, the icon will be centered by these values                   |
+| Parameter       | Type                      | Description                                                                                        |
+|-----------------|---------------------------|----------------------------------------------------------------------------------------------------|
+| `title`         | `String`                  | **Optional** Marker title and alt that describes the place and shown on marker popup               |
+| `icon`          | `String`                  | Url where the marker icon can been founded                                                         |
+| `address`       | `String`                  | **Optional** Place address shown on marker popup                                                   |
+| `customPopup`   | `String`                  | **Optional** Custom popup content                                                                  |
+| `centerOnClick` | `Boolean`                 | **Optional** `Default: true` Center map to marker when clicked                                     |
+| `showPopup`     | `Boolean`                 | **Optional** `Default: true` Choose whether show marker popup or not                               |
+| `position`      | `Object: {lat, lng}`      | Position (latitude, longitude) where the marker will be placed                                     |
+| `size`          | `Object: {width, height}` | **Optional** `Default: {33, 44}` Marker size (width, height) in px                                 |
+| `anchor`        | `Object: {x, y}`          | **Optional** `Default: {16, 44}` Marker anchor position, the icon will be centered by these values |
 
 ## Usage/Examples
 
