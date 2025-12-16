@@ -1,5 +1,17 @@
 # Release Notes
 
+## [[v1.11.0](https://github.com/edseto/map/releases/tag/1.11.0)] - 2025-12-16
+
+### Updated
+
+- Bump leaflet-control-geocoder from 2.4.0 to 3.3.1 [33343d9](https://github.com/edseto/map/commit/33343d9687c7dec58ba191aec4c56a01fecdf3a4)
+- Bump webpack-cli from 4.10.0 to 6.0.1 [1d03376](https://github.com/edseto/map/commit/1d0337627a186c95106f86b7085078ed5d6d5bf7)
+- Bump style-loader from 3.3.4 to 4.0.0 [bb94ba9](https://github.com/edseto/map/commit/bb94ba935980d97e56ca53d7644e60168be70517)
+- Bump webpack from 5.101.3 to 5.102.1 [481d65c](https://github.com/edseto/map/commit/481d65c5114fead3a47f1a93c031d80c5dfe549d)
+- Bump html-webpack-plugin from 5.6.4 to 5.6.5 [eb342e7](https://github.com/edseto/map/commit/eb342e71b08a072c9484a116aac4e41bce01660c)
+- Bump node-forge in the npm_and_yarn group across 1 directory [d0ac9f2](https://github.com/edseto/map/commit/d0ac9f24b905598ddcf0b67e886d8078447392fc)
+- Bump webpack from 5.102.1 to 5.103.0 [aaf963c](https://github.com/edseto/map/commit/aaf963cbbf81dbea51f4be7be72fa647f91f93a6)
+
 ## [[v1.10.2](https://github.com/edseto/map/releases/tag/1.10.2)]
 
 ### Updated
