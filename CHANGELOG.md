@@ -1,6 +1,6 @@
 # Release Notes
 
-## [[v1.11.0](https://github.com/edseto/map/releases/tag/1.11.0)] - 2025-12-16
+## [[v1.11.0](https://github.com/edseto/map/releases/tag/1.11.0)]
 
 ### Updated
 
