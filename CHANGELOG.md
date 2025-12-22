@@ -1,5 +1,11 @@
 # Release Notes
 
+## [[v1.11.1](https://github.com/edseto/map/releases/tag/1.11.1)]
+
+### Updated
+
+- Bump webpack from 5.104.0 to 5.104.1 [bb9c175](https://github.com/edseto/map/commit/bb9c17587ae5e3fdaddd56e8ce3e4eeeef03edb5)
+
 ## [[v1.11.0](https://github.com/edseto/map/releases/tag/1.11.0)]
 
 ### Updated
