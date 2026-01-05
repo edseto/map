@@ -1,5 +1,15 @@
 # Release Notes
 
+## [[v1.11.2](https://github.com/edseto/map/releases/tag/1.11.2)]
+
+### Added
+
+- Refactor marker popup handling into a separate method for improved readability and maintainability [06d55b1](https://github.com/edseto/map/commit/06d55b1e6bce2805f3203f2727a4700f4319051c)
+
+### Updated
+
+- Bump qs in the npm_and_yarn group across 1 directory [b2e50f8](https://github.com/edseto/map/commit/b2e50f8f1a3fa4e837eb0456048a7c77d946e323)
+
 ## [[v1.11.1](https://github.com/edseto/map/releases/tag/1.11.1)]
 
 ### Updated
