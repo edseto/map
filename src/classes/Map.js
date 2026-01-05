@@ -159,6 +159,22 @@ class Map {
         })
     }
 
+    #bindPopupToMarker(mapMarker, marker) {
+        const { title, address, customPopup, hidePopup } = marker
+        const { x: offsetX, y: offsetY } = marker.offset
+
+        if (hidePopup) return
+
+        const popupContent = customPopup || `<b>${title}</b><div>${address}</div>`
+        const hasContent = customPopup || (title || address)
+
+        if (hasContent) {
+            mapMarker.bindPopup(popupContent, {
+                offset: L.point(offsetX, offsetY)
+            })
+        }
+    }
+
     #createIcon(marker) {
         const { icon, divIcon } = marker
         const { width, height } = marker.size
@@ -206,25 +222,14 @@ class Map {
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
  
-        const { title, address, customPopup, hidePopup, elementId } = marker
+        const { title, elementId } = marker
         const { lat, lng } = marker.position
-        const { x: offsetX, y: offsetY } = marker.offset
         const markerIcon = this.#createIcon(marker)
 
         const mapMarker = L.marker([lat, lng], {icon: markerIcon, alt: title, title: title, elementId: elementId}).addTo(this.markerCluster)
 
         this.markers.push(mapMarker)
-
-        if (customPopup) {
-            mapMarker.bindPopup(customPopup, {
-                offset: L.point(offsetX, offsetY)
-            })
-        } else if ((title || address) && !hidePopup ) {
-            mapMarker.bindPopup(`<b>${title}</b><div>${address}</div>`, {
-                offset: L.point(offsetX, offsetY)
-            })
-        }
-        
+        this.#bindPopupToMarker(mapMarker, marker)
         this.#markerListener(mapMarker, marker.centerOnClick)
     }
 
