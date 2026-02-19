@@ -1,5 +1,14 @@
 # Release Notes
 
+## [[v1.11.3](https://github.com/edseto/map/releases/tag/1.11.3)]
+
+### Updated
+
+- Bump webpack-dev-server from 5.2.2 to 5.2.3 [416f444](https://github.com/edseto/map/commit/416f444b6ce548d26a6a7cf9a80af64963890b99)
+- Bump html-webpack-plugin from 5.6.5 to 5.6.6 [15c5c32](https://github.com/edseto/map/commit/15c5c325de060bcb3816735fb65cbee10f21058c)
+- Bump css-loader from 7.1.2 to 7.1.4 [cfef5e5](https://github.com/edseto/map/commit/cfef5e5bec68573ba43b447fb2f3982816cb6a5d)
+- Bump webpack from 5.104.1 to 5.105.2 [b7119f3](https://github.com/edseto/map/commit/b7119f384a7e9e29d0d89fee677b4a8ba5f07eaa)
+
 ## [[v1.11.2](https://github.com/edseto/map/releases/tag/1.11.2)]
 
 ### Added
