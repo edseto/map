@@ -1,5 +1,12 @@
 # Release Notes
 
+## [[v1.11.4](https://github.com/edseto/map/releases/tag/1.11.4)]
+
+### Updated
+
+- Bump serialize-javascript in the npm_and_yarn group across 1 directory [c7dc13d](https://github.com/edseto/map/commit/c7dc13d48e75f9d98537740abe114b50b3421737)
+- Bump webpack from 5.105.2 to 5.105.4 [9f28654](https://github.com/edseto/map/commit/9f2865445314ce3f280fd6a74a26cb1c1878871f)
+
 ## [[v1.11.3](https://github.com/edseto/map/releases/tag/1.11.3)]
 
 ### Updated
