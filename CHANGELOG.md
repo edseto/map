@@ -1,5 +1,13 @@
 # Release Notes
 
+## [[v1.12.0](https://github.com/edseto/map/releases/tag/1.12.0)]
+
+### Updated
+
+- Bump webpack-cli from 6.0.1 to 7.0.2 [381562d](https://github.com/edseto/map/commit/381562d1dfcda8a8e8adfdfe26a542a79eb25e8e)
+- Bump picomatch in the npm_and_yarn group across 1 directory [3feac7c](https://github.com/edseto/map/commit/3feac7c8915b2b8cb328e37facfa7ff88e0544bc)
+- Bump webpack from 5.105.4 to 5.106.1 [fff527d](https://github.com/edseto/map/commit/fff527dab67529191236364e6d8eca1f653b33eb)
+
 ## [[v1.11.4](https://github.com/edseto/map/releases/tag/1.11.4)]
 
 ### Updated
