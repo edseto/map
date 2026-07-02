@@ -1,5 +1,16 @@
 # Release Notes
 
+## [[v1.12.1](https://github.com/edseto/map/releases/tag/1.12.1)]
+
+### Updated
+
+- Bump html-webpack-plugin from 5.6.6 to 5.6.7 [f739d2b](https://github.com/edseto/map/commit/f739d2bbb8d6c69d469b397f72f2188c97d466cb)
+- Bump webpack from 5.106.1 to 5.108.2 [238523f](https://github.com/edseto/map/commit/238523f05bda6142e1a55ff9090a4da4f91f4177)
+- Bump fast-uri in the npm_and_yarn group across 1 directory [073433e](https://github.com/edseto/map/commit/073433e608886b2e2860eaf160d2cfaa142bee97)
+- Bump webpack-dev-server from 5.2.3 to 5.2.5 [67d17fa](https://github.com/edseto/map/commit/67d17fafa43b9e003df40ee8149b83841fa25f70)
+- Bump webpack-cli from 7.0.2 to 7.1.0 [c520d62](https://github.com/edseto/map/commit/c520d626a61d710f08fc8919c69406aa6ee00e4e)
+- Update dependencies [b43e01a](https://github.com/edseto/map/commit/b43e01af14e8c42f4ab9b87bdac8d5c2caae27a4)
+
 ## [[v1.12.0](https://github.com/edseto/map/releases/tag/1.12.0)]
 
 ### Updated
