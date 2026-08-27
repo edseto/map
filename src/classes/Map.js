@@ -2,11 +2,16 @@ import L, { divIcon } from 'leaflet'
 import 'leaflet.markercluster'
 import 'leaflet-routing-machine'
 import 'leaflet-control-geocoder'
+import { Marker as MapLibreMarker } from 'maplibre-gl'
+import { maplibreGL } from '@maplibre/maplibre-gl-leaflet'
+import 'maplibre-gl/dist/maplibre-gl.css'
 
-const defaultTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    maxZoom: 20,
-    subdomains: 'abcd',
-    attribution: '&copy; <a target="_blank" rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a target="_blank" rel="noopener noreferrer" href="https://carto.com/attributions">CARTO</a>'
+const MAP_CONFIG = {
+    openFreeMapStyle: 'https://tiles.openfreemap.org/styles/positron'
+}
+
+const defaultTileLayer = maplibreGL({
+    style: MAP_CONFIG.openFreeMapStyle
 })
 
 const defaultOptions = {
@@ -80,12 +85,15 @@ class Map {
     #init() {
         this.#addTileLayer()
         this.#addMarkerClusterLayer()
+        this.#initMap()
+
         this.options.markers?.forEach(marker => {
             this.addMarker(marker)
         })
-        this.#initMap()
 
-        if(this.options.routingOptions.enable) {
+        this.#fitToMarkers()
+
+        if (this.options.routingOptions.enable) {
             this.#addRouting()
         }
     }
@@ -97,18 +105,77 @@ class Map {
             scrollWheelZoom: scrollWheelZoom,
             dragging: dragging,
             zoomControl: false,
+            minZoom: 1,
+            maxZoom: 22
         }).setView([lat, lng], zoom)
 
         L.control.zoom({
             position: controlsPosition
-        }).addTo(this.map);
+        }).addTo(this.map)
 
         this.map._container.style.zIndex = zIndex
-        
+
         this.map.addLayer(this.tileLayer)
         this.map.addLayer(this.markerCluster)
-        this.map.fitBounds(this.markerCluster.getBounds())
+    }
+
+    #fitToMarkers() {
+        const layers = this.markers.length ? this.markers : this.markerCluster.getLayers()
+
+        if (!layers.length) {
+            this.map.setZoom(this.options.mapOptions.zoom)
+            return
+        }
+
+        this.map.fitBounds(L.featureGroup(layers).getBounds())
         this.map.setZoom(this.options.mapOptions.zoom)
+    }
+
+    #getMapLibreMap() {
+        if (this.tileLayer?._glMap) {
+            return this.tileLayer._glMap
+        }
+
+        if (typeof this.tileLayer?.getMaplibreMap === 'function') {
+            return this.tileLayer.getMaplibreMap()
+        }
+
+        return null
+    }
+
+    #addMapLibreMarker(marker, mapMarker) {
+        if (!marker.icon) {
+            return
+        }
+
+        const glMap = this.#getMapLibreMap()
+
+        if (!glMap) {
+            return
+        }
+
+        const element = document.createElement('img')
+        element.src = marker.icon
+        element.alt = marker.title || ''
+        element.width = marker.size.width
+        element.height = marker.size.height
+        element.style.width = `${marker.size.width}px`
+        element.style.height = `${marker.size.height}px`
+        element.style.display = 'block'
+        element.style.cursor = 'pointer'
+
+        new MapLibreMarker({
+            element,
+            anchor: 'bottom',
+            pitchAlignment: 'viewport',
+            rotationAlignment: 'viewport'
+        })
+            .setLngLat([marker.position.lng, marker.position.lat])
+            .addTo(glMap)
+
+        element.addEventListener('click', () => {
+            mapMarker.fire('click')
+        })
     }
 
     #addTileLayer() {
@@ -189,7 +256,7 @@ class Map {
             })
         }
 
-        if (icon) {
+        if (icon) {
             return L.icon({
                 iconUrl: icon,
                 iconSize: [width, height],
@@ -221,7 +288,7 @@ class Map {
      */
      addMarker(marker) {
         marker = { ...defaultMarkerOptions, ...marker }
- 
+
         const { title, elementId } = marker
         const { lat, lng } = marker.position
         const markerIcon = this.#createIcon(marker)
@@ -231,11 +298,12 @@ class Map {
         this.markers.push(mapMarker)
         this.#bindPopupToMarker(mapMarker, marker)
         this.#markerListener(mapMarker, marker.centerOnClick)
+        this.#addMapLibreMarker(marker, mapMarker)
     }
 
     removeMarker(index) {
         this.markerCluster.removeLayer(this.markers[index])
-        this.markers.splice(index, 1);
+        this.markers.splice(index, 1)
     }
 }
 
